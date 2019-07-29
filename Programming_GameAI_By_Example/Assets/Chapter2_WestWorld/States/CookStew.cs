@@ -30,8 +30,10 @@ public class CookStew : State<Wife>
                     // Inform her husband stew is ready.
                     MessageDispatcher.instance.DispatchMessage(0f, GameObject.Find("Elsa").GetComponent<Wife>().GetIDOfEntity(), GameObject.Find("Miner").GetComponent<Miner>().GetIDOfEntity(), MessageDispatcher.instance.messageType["Msg_StewReady"]);
 
-                    GameObject.Find("Elsa").GetComponent<Wife>().GetFSM().ChangeState(WifeGlobalState.instance);
+                    GameObject.Find("Elsa").GetComponent<Wife>().GetFSM().ChangeState(DoHouseWork.instance);
+              
                     GameObject.Find("Elsa").GetComponent<Wife>().Cooking = false;
+                   
                 }
                 return true;
         }
@@ -58,12 +60,12 @@ public class CookStew : State<Wife>
 
     public override void Execute(Wife wife)
     {
-        
+        Debug.Log("\n" + wife.GetNameOfEntity() + ": Cooking for ma' husband.");
 
     }
 
     public override void Exit(Wife wife)
     {
-      //  Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the home with starring eyes, how sweet sleep it was.");
+      
     }
 }

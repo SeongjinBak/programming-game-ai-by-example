@@ -34,15 +34,14 @@ public class Wife : BaseGameEntity
         // Debug.Log( EntityManager.instance.GetEntityFromID(GetIDOfEntity()));
         EntityManager.instance.RegisterEntity(GetComponent<Wife>());
 
-        m_location = LocationType.Nothing;
+        m_location = LocationType.Home;
 
         Cooking = false;
 
         // Set the FSM
         m_pStateMachine = new StateMachine<Wife>(this);
-        m_pStateMachine.SetCurrentState(WifeGlobalState.instance);
-      //  m_pStateMachine.SetCurrentState(EnterMineAndDigForNugget.instance);
-     //   m_pStateMachine.SetGlobalState(MinerGlobalState.instance);
+        m_pStateMachine.SetCurrentState(DoHouseWork.instance);
+        m_pStateMachine.SetGlobalState(WifeGlobalState.instance);
 
 
 
@@ -79,6 +78,7 @@ public class Wife : BaseGameEntity
     {
         while (true)
         {
+            
             m_pStateMachine.Updating();
 
             yield return new WaitForSeconds(0.5f);

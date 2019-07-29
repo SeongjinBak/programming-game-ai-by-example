@@ -47,6 +47,6 @@ public abstract class BaseGameEntity : MonoBehaviour
 
     public enum LocationType
     {
-        Nothing, GoldMine, Bank, Bar, Home
+        Nothing, GoldMine, Bank, Bar, Home, Toilet
     }
 }

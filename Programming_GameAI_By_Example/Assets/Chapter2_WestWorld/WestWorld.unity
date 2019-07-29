@@ -594,7 +594,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1501314742}
   - component: {fileID: 1501314741}
-  - component: {fileID: 1501314740}
   m_Layer: 0
   m_Name: Telegrams
   m_TagString: Untagged
@@ -602,18 +601,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1501314740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501314739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c7edc654573dc42b9a1617ed85309a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1501314741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,6 +639,7 @@ GameObject:
   - component: {fileID: 1765558868}
   - component: {fileID: 1765558870}
   - component: {fileID: 1765558871}
+  - component: {fileID: 1765558872}
   m_Layer: 0
   m_Name: WifeOwnedStates
   m_TagString: Untagged
@@ -707,6 +695,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3579e3985d69a8478ca6f7991d0e3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1765558872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765558867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdde91cef823a1147b53b02f9db30272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1997859987

@@ -20,7 +20,6 @@ public class MessageDispatcher : MonoBehaviour
     {
         messageType.Add("Msg_HiHoneyImHome", 0);
         messageType.Add("Msg_StewReady", 1);
-
         StartCoroutine(Updating());
 
     }

@@ -16,14 +16,40 @@ public class GoHomeAndSleepTilRested : State<Miner>
         }
         DontDestroyOnLoad(this.gameObject);
     }
+
+    public override bool OnMessage(Miner entityType, Telegram telegram)
+    {
+        switch (telegram.GetMessageIndex())
+        {
+
+            // integer 1 is "StewReady" Msg... sorry.
+            case 1:
+                {
+                    Debug.Log("\nMessage handled by " + GameObject.Find("Miner").GetComponent<Miner>().GetNameOfEntity() + " at time: " + Time.time);
+                    Debug.Log("\n" + GameObject.Find("Miner").GetComponent<Miner>().GetNameOfEntity() + " Okay hun, ahm a-comin'!.");
+
+                   // GameObject.Find("Miner").GetComponent<Miner>().GetFSM().ChangeState();
+                }
+                return true;
+        }
+
+        return false;
+
+    }
+
+
     public override void Enter(Miner miner)
     {
         //If the miner isn't be in the Home, the miner should change his location to go to the Home.
         if (miner.m_location != BaseGameEntity.LocationType.Home)
         {
-            Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "Walking to the my Home!");
+            Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "Walking to my Home!");
             miner.ChangeLocation(BaseGameEntity.LocationType.Home);
+ 
+            // Inform wife that a miner has arrived at home.
+            MessageDispatcher.instance.DispatchMessage(0f, miner.GetIDOfEntity(), GameObject.Find("Elsa").GetComponent<Wife>().GetIDOfEntity(), MessageDispatcher.instance.messageType["Msg_HiHoneyImHome"]);
         }
+        
     }
 
     public override void Execute(Miner miner)

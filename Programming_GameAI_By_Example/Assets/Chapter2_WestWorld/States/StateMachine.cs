@@ -23,6 +23,25 @@ public class StateMachine<Entity_Type>
         m_pGlobalState = null;
     }
 
+    
+
+    public bool HandleMessage(Telegram msg)
+    {
+        // 1. We have to check whether this state is valid and executable or not.
+        if (m_pCurrentState && m_pCurrentState.OnMessage(m_pOwner, msg))
+        {
+            return true;
+        }
+
+        // 2. If we couldn't execute, and Global state is set, move our Message to global state.
+        if(m_pGlobalState && m_pGlobalState.OnMessage(m_pOwner, msg))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     // Use those method to initiate FSM.
     public void SetCurrentState(State<Entity_Type> s) { m_pCurrentState = s; }
     public void SetGlobalState(State<Entity_Type> s) { m_pGlobalState = s; }

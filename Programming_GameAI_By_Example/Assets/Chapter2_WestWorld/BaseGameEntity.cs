@@ -2,26 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseGameEntity : MonoBehaviour
+public abstract class BaseGameEntity : MonoBehaviour
 {
     // Each entities has own ID
     private int m_ID;
+    // Entity's own name
+    private string m_Name;
+
     // Checking Next ID's validity.
     private static int m_iNextValidID;
-    
+
     // Set the ID number.
-    private void SetID(int val)
+    public void SetID(int val, string name)
     {
         m_ID = val;
+        m_Name = name;
     }
+
+    public abstract bool HandleMessage(Telegram msg);
+  
+
 
     // Constructor for this Class, And ,set own ID to newer entity.
-    public BaseGameEntity(int id = 0)
+    public BaseGameEntity(int id = 0, string name = "")
     {
-        SetID(id);
+       // SetID(id, name);
     }
 
-    public int GetNameOfEntity()
+    public string GetNameOfEntity()
+    {
+        return m_Name;
+    }
+
+    public int GetIDOfEntity()
     {
         return m_ID;
     }

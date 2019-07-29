@@ -2,6 +2,12 @@
 
 public class State<Entity_Type> : MonoBehaviour
 {
+    // When agent get this message from MessageDispathcer.cs , this method would be executed.
+    public virtual bool OnMessage(Entity_Type entityType, Telegram telegram)
+    {
+        return false;
+    }
+
     public virtual void Enter(Entity_Type entity)
     {
  

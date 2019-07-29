@@ -35,7 +35,7 @@ public class QuenchThirst : State<Miner>
         // If he doesnt feel thirsty, go back to the Mine.
         if (!miner.Thirsty())
         {
-            Debug.Log("갈증 해소 완료!\n");
+            Debug.Log("Quench thirsty has done!\n");
             miner.GetFSM().ChangeState(EnterMineAndDigForNugget.instance);
         }
 
@@ -43,7 +43,7 @@ public class QuenchThirst : State<Miner>
 
     public override void Exit(Miner miner)
     {
-        Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the Bar with my wet tongue!");
+        Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the Bar with tons of happiness!");
     }
 
 

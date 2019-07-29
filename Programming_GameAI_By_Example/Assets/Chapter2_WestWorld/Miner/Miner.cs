@@ -49,8 +49,20 @@ public class Miner : BaseGameEntity
     private int m_iFatigue;
 
 
+
+    private void Awake()
+    {
+        SetID(GameManager.instance.entityID, "Miner Bob_" + GameManager.instance.entityID++);
+        
+    }
+
     private void Start()
     {
+        // When this Entity is created, registered to Entity Manager's Dictionary.
+        // We can also Use GetEntityFromId Function in EntityManager.cs :
+        // Debug.Log( EntityManager.instance.GetEntityFromID(GetIDOfEntity()));
+        EntityManager.instance.RegisterEntity(GetComponent<Miner>());
+
         m_location = LocationType.Nothing;
         m_iMaximumGold = 5;
         m_iMaximumThirsty = 10;
@@ -73,6 +85,13 @@ public class Miner : BaseGameEntity
         StartCoroutine(Updating());
 
     }
+
+    public override bool HandleMessage(Telegram msg)
+    {
+        return m_pStateMachine.HandleMessage(msg);
+    }
+
+
 
     // Revert to previous state
     // It is for "State Blip"
@@ -111,7 +130,7 @@ public class Miner : BaseGameEntity
     // Chage this miner's location to Argument location.
     public void ChangeLocation(LocationType type)
     {
-        Debug.Log("\n장소변경: "+ type);
+        Debug.Log("\n" + GetNameOfEntity() + " Location Changed: " + type);
         m_Location = type;
     }
 
@@ -232,7 +251,7 @@ public class Miner : BaseGameEntity
             // increase miner's fatigue each updating
             m_iThirst += 1;
             m_pStateMachine.Updating();
-
+           
             yield return new WaitForSeconds(0.5f);
         }
     }

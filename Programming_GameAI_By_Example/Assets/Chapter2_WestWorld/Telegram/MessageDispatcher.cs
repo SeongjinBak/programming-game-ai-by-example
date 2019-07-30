@@ -23,6 +23,8 @@ public class MessageDispatcher : MonoBehaviour
         StartCoroutine(Updating());
 
     }
+    
+
 
     IEnumerator Updating()
     {
@@ -35,7 +37,7 @@ public class MessageDispatcher : MonoBehaviour
     }
 
     [SerializeField]
-    private Queue<Telegram> priorityQ = new Queue<Telegram>();
+    private TelegramPriorityQueue priorityQ = new TelegramPriorityQueue();
     public Dictionary<string, int> messageType = new Dictionary<string, int>();
 
     private void Discharge(BaseGameEntity pReceiver, Telegram msg = null)
@@ -75,7 +77,7 @@ public class MessageDispatcher : MonoBehaviour
     {
         // Get a current time.
         double currentTime = Time.time;
-        if(priorityQ.Count > 0)
+        if(priorityQ.Count() > 0)
         {
             while ((priorityQ.Peek().DispatchTime < currentTime) && (priorityQ.Peek().DispatchTime > 0))
             {
@@ -87,7 +89,7 @@ public class MessageDispatcher : MonoBehaviour
                 Discharge(pReceiver, telegram);
                 // Pop the telegram from queue.
                 priorityQ.Dequeue();
-                if(priorityQ.Count == 0)
+                if(priorityQ.Count() == 0)
                 {
                     break;
                 }

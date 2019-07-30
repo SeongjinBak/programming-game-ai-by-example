@@ -6,5 +6,6 @@ Programming Game AI by Example - C# & Unity Engine(2018.3.0.f2)
 
 2. West World Project
 --------------------------
+* The west world project covers FSM, and TELEGRAM for event-driven game system.
 
 

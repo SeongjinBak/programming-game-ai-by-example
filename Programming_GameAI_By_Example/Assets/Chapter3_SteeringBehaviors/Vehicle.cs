@@ -12,7 +12,7 @@ public class Vehicle : MovingEntity
     private void Start()
     {
         pSteering = new SteeringBehaviors(this.gameObject);
-        v_velocity = new Vector2(0f, 0f);
+      //  v_velocity = new Vector2(0f, 0f);
         mass = 1f;
         maxSpeed = 10f;
         _pos = transform.position;
@@ -72,10 +72,17 @@ public class Vehicle : MovingEntity
             Gizmos.DrawLine(Pos(), v_velocity);
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(Pos(), desiredVelocity);
-            Gizmos.color = Color.grey;
-            Gizmos.DrawWireSphere(Pos(), pSteering.wanderingRadius);
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawIcon(pSteering.wanderTargetPoint, "shell");
+           
+            if (pSteering != null)
+            {
+                Gizmos.DrawWireSphere(Pos(), pSteering.wanderingRadius);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawIcon(pSteering.wanderTargetPoint, "shell");
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawLine(Pos(), pSteering.interposePoint);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawIcon(pSteering.hidePoint, "Arrow", true);
+            }
         }
     }
 }

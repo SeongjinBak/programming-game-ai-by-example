@@ -41,4 +41,8 @@ public class MovingEntity : BaseGameEntity_CH3
     {
         return v_heading;
     }
+    public Vector2 SideVector()
+    {
+        return v_side;
+    }
 }

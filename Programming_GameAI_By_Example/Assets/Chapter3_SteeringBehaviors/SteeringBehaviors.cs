@@ -13,6 +13,9 @@ public class SteeringBehaviors
     public Vector2 hidePoint;
     public List<Transform> obstacles;
     public List<Transform> wayPoints;
+    public List<Vehicle> neighbors;
+    public Vector2 offsetPursuitPos;
+    
 
     public SteeringBehaviors(GameObject gameObject)
     {
@@ -253,19 +256,162 @@ public class SteeringBehaviors
         {
             return Evade(target);
         }
-        Debug.Log("Hiding ..  at " + bestHidingSpot);
+        Debug.Log("Hiding ..  spot is " + bestHidingSpot);
         hidePoint = bestHidingSpot;
         return Arrive(bestHidingSpot, Deceleration.fast);
     }
 
+    public Vector2 OffsetPursuit(Vehicle leader, Vector2 offset)
+    {
+        Vector2 worldOffsetPos = leader.Pos()+  offset;
 
+        Vector2 ToOffset = worldOffsetPos - vehicle.Pos();
+
+        float lookAheadTime = ToOffset.magnitude / (vehicle.GetMaxSpeed() + leader.GetVelocity().magnitude);
+    
+        return Arrive(worldOffsetPos + leader.GetVelocity() * lookAheadTime, Deceleration.fast);
+
+
+    }
+
+    public void FindNeighborsInScene()
+    {
+        var group = GameObject.Find("Neighbors").GetComponentsInChildren<Vehicle>();
+        if (group != null)
+        {
+            neighbors = new List<Vehicle>(group);
+            neighbors.RemoveAt(0);
+        }
+        
+    }
+
+    public void TagNeighbors<T>(T entity, List<T> containerOfEntities, float radius)
+    {
+
+        foreach (var item in containerOfEntities)
+        {
+            if (item is Vehicle v && entity is Vehicle c)
+            {
+
+                v.UnTag();
+
+                Vector2 to = v.Pos() - c.Pos();
+
+                float range = radius + v.BRadius();
+
+                if (v != c && to.SqrMagnitude() < range * range)
+                {
+                    v.Tag();
+                }
+            }
+        }
+
+    }
+    public Vector2 Seperation(List<Vehicle> neighbors)
+    {
+        Vector2 steeringForce = new Vector2(0,0);
+        for(int a = 0; a < neighbors.Count; ++a)
+        {
+            if(neighbors[a] != vehicle && neighbors[a].IsTagged())
+            {
+                Vector2 toAgent = vehicle.Pos() - neighbors[a].Pos();
+
+                steeringForce += toAgent.normalized / toAgent.magnitude;
+            }
+        }
+
+        return steeringForce;
+    }
+
+    public Vector2 Alignment(List<Vehicle> neighbors)
+    {
+        Vector2 averageHeading = new Vector2(0,0);
+
+        int neighborCount = 0;
+
+        for(int a = 0; a < neighbors.Count; a++)
+        {
+            if(neighbors[a] != vehicle && neighbors[a].IsTagged())
+            {
+                averageHeading += neighbors[a].Heading();
+                ++neighborCount;
+            }
+        }
+
+        if(neighborCount > 0)
+        {
+            averageHeading /= (float)neighborCount;
+
+            averageHeading -= vehicle.Heading();
+        }
+        return averageHeading;
+    }
+
+    public Vector2 Cohesion(List<Vehicle> neighbors)
+    {
+        Vector2 centerOfMass, steeringForce;
+        centerOfMass = new Vector2(0, 0);
+        steeringForce = new Vector2(0, 0);
+        int neighborCount = 0;
+
+        for(int i = 0; i < neighbors.Count; i++)
+        {
+            if(neighbors[i]!=vehicle && neighbors[i].IsTagged())
+            {
+                centerOfMass += neighbors[i].Pos();
+                ++neighborCount;
+            }
+        }
+
+        if (neighborCount > 0)
+        {
+            centerOfMass /= neighborCount;
+            steeringForce = Seek(centerOfMass);
+        }
+        Debug.Log(centerOfMass);
+        return steeringForce;
+    }
 
     public Vector2 Calculate()
     {
+        if (vehicle.CompareTag("Follower"))
+        {
+            // if Offset value is zero, we have to calculate the length between Leader and this follower.
+            // After calculating, we'll get the Length. This Length will be maintained during Moving. 
+            if(offsetPursuitPos.x == 0 && offsetPursuitPos.y == 0)
+            {
+                 offsetPursuitPos = new Vector2 (vehicle.Pos().x - GameObject.FindGameObjectWithTag("Player").GetComponent<Vehicle>().WorldPos().x, vehicle.Pos().y - GameObject.FindGameObjectWithTag("Player").GetComponent<Vehicle>().WorldPos().y) ;
+            }
+            return OffsetPursuit(GameObject.FindGameObjectWithTag("Player").GetComponent<Vehicle>(), offsetPursuitPos);
+        }
+        if (vehicle.CompareTag("Neighbor"))
+        {
+            if (neighbors == null)
+            {
+                FindNeighborsInScene();
+            }
+
+            if (Input.GetKey(KeyCode.R))
+            {
+                TagNeighbors<Vehicle>(vehicle, neighbors, 15f);
+                Debug.Log("Seperation");
+                return Seperation(neighbors);
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                TagNeighbors<Vehicle>(vehicle, neighbors, 100f);
+                Debug.Log("Cohesion");
+
+                return Cohesion(neighbors);
+            }
+        }
+
+
         // Let's assume that calculate() returns just random value between .3f~.8f.
         // It needs to be updated when the chapter is finished.
         if (vehicle.CompareTag("Player"))
         {
+
             if (Input.GetKey(KeyCode.A))
             {
                 return Seek(vehicle.target.transform.position);
@@ -309,6 +455,16 @@ public class SteeringBehaviors
             {
                 return Hide(GameObject.Find("Agent_C").GetComponent<Vehicle>());
             }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                if (neighbors == null)
+                {
+                    FindNeighborsInScene();
+                }
+                TagNeighbors<Vehicle>(vehicle, neighbors, 8f);
+
+                return Alignment(neighbors);
+            }                     
             else
                 //return new Vector2(Random.Range(.3f,.8f), Random.Range(.3f, .8f));
                 return new Vector2(0, 0);

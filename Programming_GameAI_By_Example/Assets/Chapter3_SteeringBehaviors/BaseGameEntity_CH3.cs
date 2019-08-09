@@ -14,6 +14,7 @@ public class BaseGameEntity_CH3 : MonoBehaviour
     protected float boundingRadius;
 
 
+    public Vector2 WorldPos() { return transform.position; }
     public Vector2 Pos() { return _pos; }
     public void SetPos(Vector2 new_pos) { _pos = new_pos; }
 
@@ -24,7 +25,10 @@ public class BaseGameEntity_CH3 : MonoBehaviour
 
     public void Tag() { _tag = true; }
     public void UnTag() { _tag = false; }
-
+    public bool IsTagged()
+    {
+        return _tag == true ? true : false;
+    }
     public Vector2 Scale() { return _scale; }
     public void SetScale(Vector2 val) { boundingRadius *= Mathf.Max(val.x, val.y) / Mathf.Max(_scale.x, _scale.y); _scale = val; }
     public void SetScale(float val) { boundingRadius *= (val / Mathf.Max(_scale.x, _scale.y)); _scale = new Vector2(val, val); }
@@ -47,6 +51,14 @@ public class BaseGameEntity_CH3 : MonoBehaviour
         _tag = false;
     }
 
+    public BaseGameEntity_CH3()
+    {
 
+        id = 1;
+        _tag = false;
+        boundingRadius = 2f;
+    }
+
+    
 
 }

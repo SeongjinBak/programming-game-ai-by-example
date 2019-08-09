@@ -10,6 +10,7 @@ Programming Game AI by Example - C# & Unity Engine(2018.3.0.f2)
 2. West World Project.
 * The west world project covers FSM, and TELEGRAM for event-driven game system.
 3. Steering Behavior.
-* The Steering Behaviors covers Basic steering like Seek, Evade, Impose, etc, and Group Steering like offset pursuit, seperate, alignment.
+* The Steering Behaviors covers Basic steering like Seek, Evade, Impose, offset pursuit, etc., and Group Steering like seperate, alignment, cohesion.
+* In this project, I didn't implement from after Flocking paragraph to the end.
 
 

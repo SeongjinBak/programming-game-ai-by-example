@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Follower
   - Neighbor
+  - Ground
+  - RedTeam
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - SoccerPlayer
+  - Ball
   - 
   - 
   - 
@@ -43,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 4016360029
+    locked: 0
+  - name: Ball
+    uniqueID: 3327876525
     locked: 0

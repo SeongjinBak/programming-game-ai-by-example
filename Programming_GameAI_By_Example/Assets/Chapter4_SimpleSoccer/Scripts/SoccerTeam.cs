@@ -21,7 +21,7 @@ public class SoccerTeam : MonoBehaviour
     public TeamColor teamColor;
     public SoccerTeam opponentTeam;
     public Goal opponentsGoal;
-
+    public Goal homeGoal;
     public Vector2[] initialRegion = new Vector2[5];
     public List<GameObject> players;
     private void Awake()
@@ -34,11 +34,13 @@ public class SoccerTeam : MonoBehaviour
         if (teamColor == TeamColor.Blue)
         {
             opponentsGoal = GameObject.Find("Reds").transform.GetChild(2).GetComponent<Goal>();
+            homeGoal = GameObject.Find("Blues").transform.GetChild(2).GetComponent<Goal>();
             opponentTeam = GameObject.Find("RedTeam").GetComponent<SoccerTeam>();  
         }
         else
         {
             opponentsGoal = GameObject.Find("Blues").transform.GetChild(2).GetComponent<Goal>();
+            homeGoal= GameObject.Find("Reds").transform.GetChild(2).GetComponent<Goal>();
             opponentTeam = GameObject.Find("BlueTeam").GetComponent<SoccerTeam>();
         }
 
@@ -308,6 +310,8 @@ public class SoccerTeam : MonoBehaviour
 
         return result;
     }
+
+    public Goal HomeGoal() { return homeGoal; }
 
     public bool CanShoot(Vector2 ballPos, float power, ref Vector2 shotTarget)
     {

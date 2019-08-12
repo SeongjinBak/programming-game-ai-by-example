@@ -24,7 +24,7 @@ public class Prm : MonoBehaviour
     public float PlayerInTargetRange = .4f;
     public float PlayerKickingDistance = .4f;
     public float MinPassDist = 5f;
-
+    public float MaxDribbleForce = 1f;
     [Header("Strength")]
     public float Spot_PassSafeStrength = 2f;
     public float Spot_CanScoreStrength = 1f;

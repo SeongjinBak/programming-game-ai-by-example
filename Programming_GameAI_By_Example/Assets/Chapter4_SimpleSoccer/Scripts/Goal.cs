@@ -41,4 +41,8 @@ public class Goal : MonoBehaviour
     {
         return rightPost;
     }
+    public Vector2 Facing()
+    {
+        return facing;
+    }
 }

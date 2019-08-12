@@ -58,19 +58,21 @@ public class SupportSpotCalculator : MonoBehaviour
         float bestScoreSoFar = 0f;
 
         List<SupportSpot> list = team == TeamColor.Red ? redZone : blueZone;
-        GameObject teamName = team == TeamColor.Red ? GameObject.Find("RedTeam").GetComponent<GameObject>() : GameObject.Find("BlueTeam").GetComponent<GameObject>();
+        GameObject teamName = team == TeamColor.Red ? GameObject.Find("RedTeam").gameObject : GameObject.Find("BlueTeam").gameObject;
       
         Debug.Log("Prm 패싱, 스코어링 가중치 조절 필요하다/\n 매개변수 teamcolor이다..");
         foreach (var item in list)
         {
             item.SetScore(1f);
             //check 1
-            if (teamName.GetComponent<SoccerTeam>().IsPassSageFromAllOpponents(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position, null, Prm.instance.MaxPassingForce))
-            {
-                item.SetScore(item.GetScore() + Prm.instance.Spot_PassSafeStrength);
-            }
+            if (teamName.GetComponent<SoccerTeam>().ControllingPlayer() != null)
+                if (teamName.GetComponent<SoccerTeam>().IsPassSafeFromAllOpponents(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position, null, Prm.instance.MaxPassingForce))
+                {
+                    item.SetScore(item.GetScore() + Prm.instance.Spot_PassSafeStrength);
+                }
+            Vector2 tmp = new Vector2();
             //check 2
-            if (teamName.GetComponent<SoccerTeam>().CanShoot(item.transform.position, Prm.instance.MaxShootingForce, new Vector2(0,0)))
+            if (teamName.GetComponent<SoccerTeam>().CanShoot(item.transform.position, Prm.instance.MaxShootingForce, ref tmp))
             {
                 item.SetScore(item.GetScore() + Prm.instance.Spot_CanScoreStrength);
             }
@@ -97,7 +99,7 @@ public class SupportSpotCalculator : MonoBehaviour
 
 
         }
-
+        
         return bestSupportSpot;
     }
 }

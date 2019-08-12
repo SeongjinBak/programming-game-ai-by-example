@@ -8,6 +8,11 @@ public class State<Entity_Type> : MonoBehaviour
         return false;
     }
 
+    public virtual bool OnMessage(Entity_Type entityType, Telegram_CH4 telegram)
+    {
+        return false;
+    }
+
     public virtual void Enter(Entity_Type entity)
     {
  

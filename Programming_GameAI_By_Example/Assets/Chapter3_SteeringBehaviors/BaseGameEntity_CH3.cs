@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseGameEntity_CH3 : MonoBehaviour
 {
-    private int id;
+    public int id;
     private int entityType;
     private bool _tag;
     [SerializeField]
@@ -22,7 +22,7 @@ public class BaseGameEntity_CH3 : MonoBehaviour
     public void SetBRadius(float r) { boundingRadius = r; }
 
     public int ID() { return id; }
-
+    public void SetID(int n) { id = n; }
     public void Tag() { _tag = true; }
     public void UnTag() { _tag = false; }
     public bool IsTagged()

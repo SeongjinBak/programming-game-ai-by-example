@@ -45,4 +45,9 @@ public class MovingEntity_CH4 : BaseGameEntity_CH3
     {
         return v_side;
     }
+
+    public Vector2 Velocity()
+    {
+        return v_velocity;
+    }
 }

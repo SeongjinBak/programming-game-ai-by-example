@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-public class TelegramPriorityQueue
+public class TelegramPriorityQueue_CH4
 {
 
-    private List<Telegram> priorityQueue = new List<Telegram>();
+    private List<Telegram_CH4> priorityQueue = new List<Telegram_CH4>();
 
 
 
-    public void Enqueue(Telegram telegram)
+    public void Enqueue(Telegram_CH4 telegram)
     {
         float delayTime = telegram.DispatchTime;
         int index = 0;
@@ -27,7 +27,7 @@ public class TelegramPriorityQueue
         }
     }
 
-    public Telegram Peek()
+    public Telegram_CH4 Peek()
     {
         if (priorityQueue.Count > 0)
         {
@@ -35,7 +35,7 @@ public class TelegramPriorityQueue
         }
         else
         {
-            Telegram dummy = new Telegram();
+            Telegram_CH4 dummy = new Telegram_CH4();
             return dummy;
         }
     }

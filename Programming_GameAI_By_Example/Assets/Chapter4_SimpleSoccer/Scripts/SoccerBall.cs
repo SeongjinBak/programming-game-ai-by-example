@@ -7,6 +7,8 @@ public class SoccerBall : MovingEntity_CH4
     [SerializeField]
     private Vector2 oldPos;
     [SerializeField]
+    private Vector2 velocity;
+    [SerializeField]
     // pointer of a player who got a ball
     private GameObject owner;
 
@@ -18,6 +20,15 @@ public class SoccerBall : MovingEntity_CH4
         
     }
 
+    public float Speed()
+    {
+        return velocity.magnitude;
+    }
+
+    public new Vector2 Velocity()
+    {
+        return velocity;
+    }
     private void Awake()
     {
         ballRb = GetComponent<Rigidbody2D>();
@@ -32,7 +43,11 @@ public class SoccerBall : MovingEntity_CH4
 
     public void Kick(Vector2 direction, float force)
     {
+        Vector2 nor = direction.normalized;
 
+        Vector2 acc = (direction * force) / ballRb.mass;
+
+        velocity = acc;
     }
 
     public float TimeToCoverDistance(Vector2 from, Vector2 to, float force)

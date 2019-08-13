@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class Steering_CH4 : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         player = GetComponent<PlayerBase>();
         ball = GameObject.Find("Ball").GetComponent<SoccerBall>();
+        multSeparation = 1f;
+        viewDistance = 11f;
     }
+    [Header("STATE")]
+    [SerializeField]
+    bool seek;
+    [SerializeField]
+    bool arrive;
+    [SerializeField]
+    bool pursuit;
+    [SerializeField]
+    bool separate;
+    [SerializeField]
+    bool interpose;
 
+
+    [Header("MISC")]
     [SerializeField]
    private PlayerBase player;
     [SerializeField]
@@ -27,6 +42,8 @@ public class Steering_CH4 : MonoBehaviour
 
     [SerializeField]
     int flags;
+
+    
 
     [SerializeField]
     enum behavior_type
@@ -48,11 +65,12 @@ public class Steering_CH4 : MonoBehaviour
         slow = 3, normal = 2, fast = 1
     }
 
+   
 
     Vector2 Seek(Vector2 target)
     {
         Vector2 DesiredVelocity = (target - (Vector2)player.transform.position).normalized * player.myMaxSpeed;
-        
+
         return (DesiredVelocity - player.Velocity());
     } 
 
@@ -84,7 +102,7 @@ public class Steering_CH4 : MonoBehaviour
             return (desiredVelocity - player.Velocity());
         }
 
-        return Vector2.zero;
+        return new Vector2(0f,0f);
     }
 
     Vector2 Pursuit(SoccerBall ball)
@@ -110,7 +128,7 @@ public class Steering_CH4 : MonoBehaviour
     Vector2 Separation()
     {
         //iterate through all the neighbors and calculate the vector from the
-        Vector2 steeringForce = Vector2.zero;
+        Vector2 _steeringForce = new Vector2(0f, 0f);
 
         List<PlayerBase> allPlayers = new List<PlayerBase>(transform.parent.GetComponentsInChildren<PlayerBase>());
 
@@ -119,10 +137,10 @@ public class Steering_CH4 : MonoBehaviour
             if (item != player && item.Steering().Tagged())
             {
                 Vector2 toAgent = player.transform.position - item.transform.position;
-                steeringForce += (toAgent / toAgent.magnitude).normalized;
+                _steeringForce += (toAgent / toAgent.magnitude).normalized;
             }
         }
-        return steeringForce;
+        return _steeringForce;
     }
 
     Vector2 Interpose(SoccerBall ball, Vector2 pos, float distFromTarget)
@@ -139,6 +157,7 @@ public class Steering_CH4 : MonoBehaviour
         {
             item.Steering().UnTag();
             Vector2 to = item.transform.position - player.transform.position;
+
             if(to.magnitude < (viewDistance))
             {
                 item.Steering().Tag();
@@ -152,21 +171,22 @@ public class Steering_CH4 : MonoBehaviour
     {
         float magnitudeSoFar = sf.magnitude;
         float magnitudeRemaining = player.myMaxSpeed - magnitudeSoFar;
-        Debug.Log("Max Speed of Player is set as. " + player.myMaxSpeed);
-        if (magnitudeSoFar <= 0f) return false;
+       
+     //   Debug.Log("Max Speed of Player is set as. " + player.myMaxSpeed);
+        if (magnitudeRemaining <= 0f) return false;
 
         float magnitudeToAdd = forceToAdd.magnitude;
 
         if (magnitudeToAdd > magnitudeRemaining)
             magnitudeToAdd = magnitudeRemaining;
         sf += (forceToAdd).normalized * magnitudeToAdd;
-
+       
         return true;
     }
 
     public Vector2 Calculate()
     {
-        steeringForce = Vector2.zero;
+        steeringForce = new Vector2(0f, 0f);
 
         steeringForce = SumForces();
 
@@ -179,9 +199,9 @@ public class Steering_CH4 : MonoBehaviour
 
     Vector2 SumForces()
     {
-        Vector2 force = Vector2.zero;
+        Vector2 force = new Vector2(0f, 0f);
         FindNeighbours();
-
+     
         if (On( behavior_type.separation))
         {
             force += Separation() * multSeparation;
@@ -191,32 +211,38 @@ public class Steering_CH4 : MonoBehaviour
 
         if (On(behavior_type.seek))
         {
+      
             force += Seek(target);
 
             if (!AccumulateForce(ref steeringForce, force)) return steeringForce;
+         //   print("Seek " + steeringForce);
         }
+        
 
         if (On(behavior_type.arrive))
         {
             force += Arrive(target, Deceleration.fast);
 
             if (!AccumulateForce(ref steeringForce, force)) return steeringForce;
+          //  print("Arrve " + steeringForce);
         }
-
+        
         if (On(behavior_type.pursuit))
         {
             force += Pursuit(ball);
 
             if (!AccumulateForce(ref steeringForce, force)) return steeringForce;
+          //  print("pursuit " + steeringForce);
         }
-
+        
         if (On(behavior_type.interpose))
         {
             force += Interpose(ball, target, interposeDist);
 
             if (!AccumulateForce(ref steeringForce, force)) return steeringForce;
+            //print("interoise " + steeringForce);
         }
-
+        
         return steeringForce;
     }
 
@@ -246,25 +272,25 @@ public class Steering_CH4 : MonoBehaviour
     public void Tag() { tagged = true; }
     public void UnTag() { tagged = false; }
 
-    public void SeekOn() { flags |= (int)behavior_type.seek; }
+    public void SeekOn() { flags |= (int)behavior_type.seek; seek = true; }
 
-    public void ArriveOn() { flags |= (int)behavior_type.arrive; }
+    public void ArriveOn() { flags |= (int)behavior_type.arrive; arrive = true; }
 
-    public void PursuitOn() { flags |= (int)behavior_type.pursuit; }
+    public void PursuitOn() { flags |= (int)behavior_type.pursuit; pursuit = true; }
 
-    public void SeperationOn() { flags |= (int)behavior_type.separation; }
+    public void SeperationOn() { flags |= (int)behavior_type.separation; separate = true; }
 
-    public void InterposeOn() { flags |= (int)behavior_type.interpose; }
+    public void InterposeOn() { flags |= (int)behavior_type.interpose; interpose = true; }
 
-    public void SeekOff() { flags ^= (int)behavior_type.seek; }
+    public void SeekOff() { flags ^= (int)behavior_type.seek; seek = false; }
 
-    public void ArriveOff() { flags ^= (int)behavior_type.arrive; }
+    public void ArriveOff() { flags ^= (int)behavior_type.arrive; arrive = false; }
 
-    public void PursuitOff() { flags ^= (int)behavior_type.pursuit; }
+    public void PursuitOff() { flags ^= (int)behavior_type.pursuit; pursuit = false; }
 
-    public void SeperationOff() { flags ^= (int)behavior_type.separation; }
+    public void SeperationOff() { flags ^= (int)behavior_type.separation; separate = false; }
 
-    public void InterposeOff() { flags ^= (int)behavior_type.interpose; }
+    public void InterposeOff() { flags ^= (int)behavior_type.interpose; interpose = false; }
 
     public bool SeekIsOn() { return On(behavior_type.seek); }
 

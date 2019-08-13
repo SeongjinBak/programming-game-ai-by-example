@@ -204,7 +204,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (9)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -249,7 +249,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (35)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -387,6 +387,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &51788039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +413,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &51788040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +428,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -445,10 +455,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (17)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &84452286
 Transform:
   m_ObjectHideFlags: 0
@@ -490,7 +500,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (14)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -535,10 +545,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (22)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &105964078
 Transform:
   m_ObjectHideFlags: 0
@@ -580,7 +590,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (42)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -625,10 +635,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (10)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &130488412
 Transform:
   m_ObjectHideFlags: 0
@@ -670,7 +680,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (26)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -715,10 +725,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &141374396
 Transform:
   m_ObjectHideFlags: 0
@@ -760,10 +770,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (45)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &151985782
 Transform:
   m_ObjectHideFlags: 0
@@ -805,10 +815,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &166176156
 Transform:
   m_ObjectHideFlags: 0
@@ -850,10 +860,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (30)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &185320341
 Transform:
   m_ObjectHideFlags: 0
@@ -895,10 +905,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (27)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &216944425
 Transform:
   m_ObjectHideFlags: 0
@@ -940,7 +950,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (20)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1414,6 +1424,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &284218647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,6 +1450,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &284218648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,6 +1465,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -1472,7 +1492,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (35)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1517,7 +1537,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (17)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1562,10 +1582,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (8)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &287481013
 Transform:
   m_ObjectHideFlags: 0
@@ -1607,7 +1627,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (7)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1745,6 +1765,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &418951267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,6 +1791,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &418951268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,6 +1806,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -1803,7 +1833,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (5)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1848,10 +1878,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (26)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &456638998
 Transform:
   m_ObjectHideFlags: 0
@@ -1893,10 +1923,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (42)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &488817599
 Transform:
   m_ObjectHideFlags: 0
@@ -1938,10 +1968,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (44)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &497866920
 Transform:
   m_ObjectHideFlags: 0
@@ -1983,10 +2013,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (41)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &498415712
 Transform:
   m_ObjectHideFlags: 0
@@ -2028,7 +2058,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (13)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2073,10 +2103,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (32)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &606834575
 Transform:
   m_ObjectHideFlags: 0
@@ -2118,7 +2148,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (11)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2163,10 +2193,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (5)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &635171819
 Transform:
   m_ObjectHideFlags: 0
@@ -2208,7 +2238,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (6)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2346,6 +2376,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &643495191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,6 +2402,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &643495192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,6 +2417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -2404,7 +2444,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (14)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2479,23 +2519,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12154cc64fec8b546ab24454982b9851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPassingForce: 5
-  MaxShootingForce: 7
+  MaxPassingForce: 1
+  MaxShootingForce: 2
   PlayerMaxSpeedWithBall: 1.2
   PlayerMaxSpeedWithoutBall: 1.6
   PlayerInTargetRange: 10
   PlayerKickingDistance: 0.2
-  MinPassDist: 5
+  MinPassDist: 2
+  MaxDribbleForce: 0.6
   Spot_PassSafeStrength: 2
   Spot_CanScoreStrength: 1
   Spot_DistFromControllingPlayerStrength: 2
   NumAttemptsToFindValidStrike: 5
-  PlayerKickFrequency: 8
+  PlayerKickFrequency: 9
   ChanceOfUsingArriveTypeReceiveBehavior: 0.5
-  ChancePlayerAttemptsPotShot: 0.05
+  ChancePlayerAttemptsPotShot: 0.1
   BallWithinReceivingRange: 3
   PlayerKickingAccuracy: 0.99
-  PlayerComfortZone: 5
+  PlayerComfortZone: 3
 --- !u!1 &692474814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,10 +2550,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (16)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &692474815
 Transform:
   m_ObjectHideFlags: 0
@@ -2554,7 +2595,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (19)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2599,7 +2640,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (15)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2644,10 +2685,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (40)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &761986445
 Transform:
   m_ObjectHideFlags: 0
@@ -2689,7 +2730,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (18)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2734,7 +2775,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (21)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2779,10 +2820,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (18)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &809175084
 Transform:
   m_ObjectHideFlags: 0
@@ -2824,10 +2865,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (20)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &810845439
 Transform:
   m_ObjectHideFlags: 0
@@ -2869,7 +2910,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2914,10 +2955,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &836997086
 Transform:
   m_ObjectHideFlags: 0
@@ -2959,7 +3000,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (33)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3004,10 +3045,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (12)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &894151065
 Transform:
   m_ObjectHideFlags: 0
@@ -3049,10 +3090,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &898264101
 Transform:
   m_ObjectHideFlags: 0
@@ -3194,10 +3235,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (28)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &915928504
 Transform:
   m_ObjectHideFlags: 0
@@ -3239,7 +3280,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (11)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3319,8 +3360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPost: {x: 0, y: 0}
   rightPost: {x: 0, y: 0}
-  facing: {x: 0, y: 0}
-  center: {x: 0, y: 0}
+  facing: {x: 1, y: 0}
+  center: {x: 1, y: 0}
   numGoalsScored: 0
 --- !u!1 &923725251
 GameObject:
@@ -3335,7 +3376,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3380,10 +3421,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (28)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &946728085
 Transform:
   m_ObjectHideFlags: 0
@@ -3518,6 +3559,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &952801029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,6 +3585,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &952801030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3554,6 +3600,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -3576,10 +3627,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &978096075
 Transform:
   m_ObjectHideFlags: 0
@@ -3695,7 +3746,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (29)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3821,7 +3872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPost: {x: 0, y: 0}
   rightPost: {x: 0, y: 0}
-  facing: {x: 0, y: 0}
+  facing: {x: 1, y: 0}
   center: {x: 0, y: 0}
   numGoalsScored: 0
 --- !u!1 &1111216780
@@ -3837,7 +3888,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (41)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3882,7 +3933,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (30)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3894,7 +3945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117566974}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.49, y: 5.72, z: 0}
+  m_LocalPosition: {x: -9.63, y: 7.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613381731}
@@ -4020,6 +4071,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &1139959480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4044,6 +4097,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &1139959481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4056,6 +4112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -4078,10 +4139,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (24)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1167355314
 Transform:
   m_ObjectHideFlags: 0
@@ -4216,6 +4277,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &1173875338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4240,6 +4303,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &1173875339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4252,6 +4318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -4274,7 +4345,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (38)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4319,7 +4390,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (46)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4364,10 +4435,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (31)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1192652156
 Transform:
   m_ObjectHideFlags: 0
@@ -4478,10 +4549,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (23)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1227878590
 Transform:
   m_ObjectHideFlags: 0
@@ -4616,6 +4687,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &1262161346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4640,6 +4713,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &1262161347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4652,6 +4728,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -4674,7 +4755,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (47)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4798,10 +4879,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (48)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1296091033
 Transform:
   m_ObjectHideFlags: 0
@@ -4843,10 +4924,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (7)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1300339216
 Transform:
   m_ObjectHideFlags: 0
@@ -4888,10 +4969,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (13)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1301633283
 Transform:
   m_ObjectHideFlags: 0
@@ -4933,7 +5014,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5054,7 +5135,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (25)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5099,7 +5180,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (32)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5223,7 +5304,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (12)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5361,6 +5442,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &1441649554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5385,6 +5468,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &1441649555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5397,6 +5483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -5579,7 +5670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPost: {x: 0, y: 0}
   rightPost: {x: 0, y: 0}
-  facing: {x: 0, y: 0}
+  facing: {x: -1, y: 0}
   center: {x: 0, y: 0}
   numGoalsScored: 0
 --- !u!1 &1454734965
@@ -5595,10 +5686,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (21)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1454734966
 Transform:
   m_ObjectHideFlags: 0
@@ -5640,10 +5731,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (25)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1468737067
 Transform:
   m_ObjectHideFlags: 0
@@ -5856,6 +5947,7 @@ GameObject:
   - component: {fileID: 1503479387}
   - component: {fileID: 1503479390}
   - component: {fileID: 1503479389}
+  - component: {fileID: 1503479391}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -5959,15 +6051,31 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1.16
+  m_LinearDrag: 2.02
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &1503479391
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503479386}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.465
 --- !u!1 &1505875703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,10 +6089,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (45)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1505875704
 Transform:
   m_ObjectHideFlags: 0
@@ -6066,10 +6174,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (9)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1532519019
 Transform:
   m_ObjectHideFlags: 0
@@ -6111,7 +6219,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (16)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6191,7 +6299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPost: {x: 0, y: 0}
   rightPost: {x: 0, y: 0}
-  facing: {x: 0, y: 0}
+  facing: {x: -1, y: 0}
   center: {x: 0, y: 0}
   numGoalsScored: 0
 --- !u!1 &1564779421
@@ -6207,7 +6315,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (39)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6252,7 +6360,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (8)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6297,7 +6405,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (27)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6342,10 +6450,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (34)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1580829857
 Transform:
   m_ObjectHideFlags: 0
@@ -6387,10 +6495,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (19)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1587904941
 Transform:
   m_ObjectHideFlags: 0
@@ -6561,10 +6669,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (36)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1756641488
 Transform:
   m_ObjectHideFlags: 0
@@ -6606,10 +6714,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (36)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1759085482
 Transform:
   m_ObjectHideFlags: 0
@@ -6736,6 +6844,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1784641077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784641079}
+  - component: {fileID: 1784641078}
+  m_Layer: 0
+  m_Name: Wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1784641078
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784641077}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20.26}
+  m_EdgeRadius: 0
+--- !u!4 &1784641079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784641077}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.52, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1810355136
 GameObject:
   m_ObjectHideFlags: 0
@@ -6788,9 +6953,11 @@ MonoBehaviour:
   playerClosestToBall: {fileID: 0}
   controllingPlayer: {fileID: 0}
   supportingPlayer: {fileID: 0}
+  ball: {fileID: 0}
   teamColor: 1
   opponentTeam: {fileID: 0}
   opponentsGoal: {fileID: 0}
+  homeGoal: {fileID: 0}
   initialRegion:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -6803,6 +6970,8 @@ MonoBehaviour:
   - {fileID: 1139959476}
   - {fileID: 1262161342}
   - {fileID: 643495187}
+  state: 
+  distToBallOfClosestPlayer: 0
 --- !u!1 &1814286416
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,6 +7046,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814286416}
   m_CullTransparentMesh: 0
+--- !u!1 &1814337355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814337357}
+  - component: {fileID: 1814337356}
+  m_Layer: 0
+  m_Name: Wall (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1814337356
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814337355}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20.26}
+  m_EdgeRadius: 0
+--- !u!4 &1814337357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814337355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.34, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1814448095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,10 +7116,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (10)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1814448096
 Transform:
   m_ObjectHideFlags: 0
@@ -7014,10 +7240,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (31)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1863741349
 Transform:
   m_ObjectHideFlags: 0
@@ -7059,7 +7285,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (37)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7104,7 +7330,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (40)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7149,10 +7375,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (34)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1912894953
 Transform:
   m_ObjectHideFlags: 0
@@ -7194,7 +7420,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (37)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7239,10 +7465,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (39)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1935105875
 Transform:
   m_ObjectHideFlags: 0
@@ -7284,7 +7510,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (24)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7329,7 +7555,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (43)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7413,9 +7639,11 @@ MonoBehaviour:
   playerClosestToBall: {fileID: 0}
   controllingPlayer: {fileID: 0}
   supportingPlayer: {fileID: 0}
+  ball: {fileID: 0}
   teamColor: 0
   opponentTeam: {fileID: 0}
   opponentsGoal: {fileID: 0}
+  homeGoal: {fileID: 0}
   initialRegion:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -7428,6 +7656,8 @@ MonoBehaviour:
   - {fileID: 1970711904}
   - {fileID: 418951263}
   - {fileID: 51788035}
+  state: 
+  distToBallOfClosestPlayer: 0
 --- !u!1 &1959753237
 GameObject:
   m_ObjectHideFlags: 0
@@ -7613,6 +7843,8 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 0}
+  distToBall: 0
 --- !u!114 &1970711908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7637,6 +7869,9 @@ MonoBehaviour:
   playerRole: 
   homeRegion: {x: 0, y: 0}
   steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!114 &1970711909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7649,6 +7884,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b80b8e3005e2941a25d741cf7cc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seek: 0
+  arrive: 0
+  pursuit: 0
+  separate: 0
+  interpose: 0
   player: {fileID: 0}
   ball: {fileID: 0}
   steeringForce: {x: 0, y: 0}
@@ -7671,7 +7911,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7716,7 +7956,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (33)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7761,10 +8001,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (38)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1989801928
 Transform:
   m_ObjectHideFlags: 0
@@ -7806,10 +8046,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (23)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2007478000
 Transform:
   m_ObjectHideFlags: 0
@@ -7851,7 +8091,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (29)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7975,7 +8215,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (44)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8102,10 +8342,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (15)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2083531290
 Transform:
   m_ObjectHideFlags: 0
@@ -8147,7 +8387,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8192,10 +8432,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (43)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2111158779
 Transform:
   m_ObjectHideFlags: 0
@@ -8237,7 +8477,7 @@ GameObject:
   m_Layer: 0
   m_Name: spot (22)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8282,10 +8522,10 @@ GameObject:
   m_Layer: 0
   m_Name: spot (6)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2129595602
 Transform:
   m_ObjectHideFlags: 0

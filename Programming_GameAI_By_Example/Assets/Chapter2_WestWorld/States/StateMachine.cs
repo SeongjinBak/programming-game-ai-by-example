@@ -64,6 +64,7 @@ public class StateMachine<Entity_Type>
     // Use this method to uptate FSM
     public void Updating()
     {
+       
         // If static state is existed, call execute method
         if (m_pGlobalState)
             m_pGlobalState.Execute(m_pOwner);

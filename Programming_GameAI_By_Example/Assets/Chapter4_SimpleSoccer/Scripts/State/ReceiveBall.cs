@@ -20,9 +20,9 @@ public class ReceiveBall : State<FieldPlayer>
     {
         player.Team().SetReceiver(player.transform.parent.gameObject);
 
-        player.Team().SetControllingPlayer(player.transform.parent.gameObject);
+        player.Team().SetControllingPlayer(player.gameObject);
 
-        const float passThreatRadius = 5.5f;
+        const float passThreatRadius =3f;
         Debug.Log("passThreatRadius: " + passThreatRadius);
 
         if ((player.InHotRegion() || Random.Range(0f, 1f) < Prm.instance.ChanceOfUsingArriveTypeReceiveBehavior) && !player.Team().IsOpponentWithInRadius(player.transform.position, passThreatRadius))
@@ -63,6 +63,9 @@ public class ReceiveBall : State<FieldPlayer>
 
     public override void Exit(FieldPlayer player)
     {
+        player.Steering().ArriveOff();
+        player.Steering().PursuitOff();
 
+        player.Team().SetReceiver(null);
     }
 }

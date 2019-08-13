@@ -28,11 +28,11 @@ public class SupportSpotCalculator : MonoBehaviour
         if(group != null)
         {
             blueZone = new List<SupportSpot>(group);
-            blueZone.RemoveAt(0);
+            //blueZone.RemoveAt(0);
         }
         group = GameObject.Find("RedZone").GetComponentsInChildren<SupportSpot>();
         redZone = new List<SupportSpot>(group);
-        redZone.RemoveAt(0);
+        //redZone.RemoveAt(0);
 
         frame = 0;
         bestSupportSpot = new Vector2(0, 0);
@@ -40,16 +40,13 @@ public class SupportSpotCalculator : MonoBehaviour
      
     }
 
-    private void Update()
+    public Vector2 GetBestSupportingSpot(TeamColor team)
     {
-        frame++;
-        if (frame > 60)
-        {
-            frame = 0;
-            
-        }
+        if (bestSupportSpot != Vector2.zero)
+            return bestSupportSpot;
+        else
+            return DetermineBestSupportingPosition(team);
     }
-
     public Vector2 DetermineBestSupportingPosition(TeamColor team)
     {
 
@@ -60,37 +57,38 @@ public class SupportSpotCalculator : MonoBehaviour
         List<SupportSpot> list = team == TeamColor.Red ? redZone : blueZone;
         GameObject teamName = team == TeamColor.Red ? GameObject.Find("RedTeam").gameObject : GameObject.Find("BlueTeam").gameObject;
       
-        Debug.Log("Prm 패싱, 스코어링 가중치 조절 필요하다/\n 매개변수 teamcolor이다..");
+        //Debug.Log("Prm 패싱, 스코어링 가중치 조절 필요하다/\n 매개변수 teamcolor이다..");
         foreach (var item in list)
         {
             item.SetScore(1f);
             //check 1
             if (teamName.GetComponent<SoccerTeam>().ControllingPlayer() != null)
+            {
                 if (teamName.GetComponent<SoccerTeam>().IsPassSafeFromAllOpponents(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position, null, Prm.instance.MaxPassingForce))
                 {
                     item.SetScore(item.GetScore() + Prm.instance.Spot_PassSafeStrength);
                 }
-            Vector2 tmp = new Vector2();
-            //check 2
-            if (teamName.GetComponent<SoccerTeam>().CanShoot(item.transform.position, Prm.instance.MaxShootingForce, ref tmp))
-            {
-                item.SetScore(item.GetScore() + Prm.instance.Spot_CanScoreStrength);
-            }
-
-            if (teamName.GetComponent<SoccerTeam>().SupportingPlayer())
-            {
-                
-                const float optimalDistance = 4.5f;
-                Debug.Log("지원선수와 최소거리는 " + optimalDistance + " 로 설정됨.");
-                float dist = Vector2.Distance(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position);
-                float temp = Mathf.Abs(optimalDistance - dist);
-
-                if(temp < optimalDistance)
+                Vector2 tmp = new Vector2();
+                //check 2
+                if (teamName.GetComponent<SoccerTeam>().CanShoot(item.transform.position, Prm.instance.MaxShootingForce, ref tmp))
                 {
-                    item.SetScore(item.GetScore() + Prm.instance.Spot_DistFromControllingPlayerStrength * (optimalDistance - temp)/optimalDistance);
+                    item.SetScore(item.GetScore() + Prm.instance.Spot_CanScoreStrength);
+                }
+
+                if (teamName.GetComponent<SoccerTeam>().SupportingPlayer())
+                {
+
+                    const float optimalDistance = 4f;
+                    //  Debug.Log("지원선수와 최소거리는 " + optimalDistance + " 로 설정됨.");
+                    float dist = Vector2.Distance(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position);
+                    float temp = Mathf.Abs(optimalDistance - dist);
+
+                    if (temp < optimalDistance)
+                    {
+                        item.SetScore(item.GetScore() + Prm.instance.Spot_DistFromControllingPlayerStrength * (optimalDistance - temp) / optimalDistance);
+                    }
                 }
             }
-
             if(item.GetScore() > bestScoreSoFar)
             {
                 bestScoreSoFar = item.GetScore();
@@ -99,7 +97,7 @@ public class SupportSpotCalculator : MonoBehaviour
 
 
         }
-        
+        //Debug.Log("vss : " + bestSupportSpot);
         return bestSupportSpot;
     }
 }

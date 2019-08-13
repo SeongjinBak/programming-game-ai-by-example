@@ -28,15 +28,17 @@ public class PrepareForKickOff : State<SoccerTeam>
 
     public override void Execute(SoccerTeam team)
     {
-        if(team.AllPlayersAtHome() && team.opponentTeam.AllPlayersAtHome())
+        if (team.AllPlayersAtHome() && team.opponentTeam.AllPlayersAtHome())
         {
+
             team.GetFSM().ChangeState(Defending.instance);
+
         }
     }
 
     public override void Exit(SoccerTeam team)
     {
-       // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
+        SoccerPitch.instance.SetGameOn();
     }
 
 }

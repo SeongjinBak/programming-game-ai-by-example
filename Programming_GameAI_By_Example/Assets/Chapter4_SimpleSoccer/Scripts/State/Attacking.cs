@@ -18,8 +18,15 @@ public class Attacking : State<SoccerTeam>
 
     public override void Enter(SoccerTeam team)
     {
-        Vector2[] blueRegions = GameObject.Find("BlueTeam").GetComponent<SoccerTeam>().initialRegion;
-        Vector2[] redRegions = GameObject.Find("RedTeam").GetComponent<SoccerTeam>().initialRegion;
+        Vector2[] blueRegions = new Vector2[5]; 
+        Vector2[] redRegions = new Vector2[5]; 
+
+        for(int i = 0; i < 5; i++)
+        {
+            blueRegions[i] = GameObject.Find("BlueTeam").GetComponent<SoccerTeam>().initialRegion[i];
+            redRegions[i] = GameObject.Find("RedTeam").GetComponent<SoccerTeam>().initialRegion[i];
+        }
+
 
         if (team.teamColor == TeamColor.Blue)
         {
@@ -48,13 +55,13 @@ public class Attacking : State<SoccerTeam>
         {     
             team.GetFSM().ChangeState(Defending.instance);
         }
-        Debug.Log("여기서, BSS 계산했는데 어디다가반환을 안한다.");
+        //Debug.Log("여기서, BSS 계산했는데 어디다가반환을 안한다.");
         SupportSpotCalculator.instance.DetermineBestSupportingPosition(team.teamColor);
     }
 
     public override void Exit(SoccerTeam team)
     {
-        // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
+        team.SetSuppprtingPlayer(null);
     }
 
 }

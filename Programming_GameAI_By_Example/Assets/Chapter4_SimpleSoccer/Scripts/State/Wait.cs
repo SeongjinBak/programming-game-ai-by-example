@@ -17,7 +17,13 @@ public class Wait : State<FieldPlayer>
     }
     public override void Enter(FieldPlayer player)
     {
-
+        if (player.Pitch().GameOn())
+        {
+            if (player.Team().teamColor == TeamColor.Blue)
+                player.Steering().SetTarget((player.Team().initialRegion[player.ID() - 6]));
+            else
+                player.Steering().SetTarget((player.Team().initialRegion[player.ID() - 1]));
+        }
     }
 
     public override void Execute(FieldPlayer player)
@@ -30,7 +36,7 @@ public class Wait : State<FieldPlayer>
         else
         {
             player.Steering().ArriveOff();
-            player.SetVelocity(Vector2.zero);
+            player.SetVelocity(new Vector2(0f,0f));
 
             player.TrackBall();
         }

@@ -14,7 +14,11 @@ public class SoccerBall : MovingEntity_CH4
 
     [SerializeField]
     private Rigidbody2D ballRb;
-
+    private void Start()
+    {
+        oldPos = transform.position;
+        StartCoroutine(Updating());
+    }
     public void TestCollisionWithWalls()
     {
         
@@ -35,6 +39,22 @@ public class SoccerBall : MovingEntity_CH4
         transform.position = new Vector2(0, 0);
 
     }
+    
+    public IEnumerator Updating()
+    {
+        while (true)
+        {
+            oldPos = transform.position;
+            
+            velocity += (velocity).normalized * -0.05f;
+            
+            transform.position = (Vector2)transform.position + velocity;
+
+            v_heading = velocity.normalized;
+            yield return new WaitForSeconds(0.05f);
+        }
+        
+    }
 
     public bool HandleMessage(Telegram msg)
     {
@@ -43,11 +63,14 @@ public class SoccerBall : MovingEntity_CH4
 
     public void Kick(Vector2 direction, float force)
     {
-        Vector2 nor = direction.normalized;
+       // velocity = new Vector2(0, 0);
+        direction.Normalize();
 
         Vector2 acc = (direction * force) / ballRb.mass;
 
         velocity = acc;
+
+
     }
 
     public float TimeToCoverDistance(Vector2 from, Vector2 to, float force)
@@ -84,10 +107,17 @@ public class SoccerBall : MovingEntity_CH4
     // This method is used when keeper and player who trapping the ball trap(to stop the ball).
     public void Trap(GameObject owner)
     {
-        v_velocity = Vector2.zero;
+        v_velocity = new Vector2(0,0);
         this.owner = owner;
     }
-
+    public void SetOwner(GameObject ow)
+    {
+        owner = ow;
+    }
+    public GameObject GetOwner()
+    {
+        return owner;
+    }
     public Vector2 OldPos()
     {
         return oldPos;

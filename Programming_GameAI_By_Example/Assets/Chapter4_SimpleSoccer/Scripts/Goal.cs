@@ -10,8 +10,8 @@ public class Goal : MonoBehaviour
     private Vector2 rightPost;
 
     // the direction of the goal
-    [SerializeField]
-    private Vector2 facing;
+
+    public Vector2 facing;
     // the center of the goal line.
     [SerializeField]
     private Vector2 center;
@@ -26,7 +26,7 @@ public class Goal : MonoBehaviour
         rightPost = new Vector2(transform.position.x, transform.position.y - 5f);
         center = (leftPost + rightPost) / 2;
         numGoalsScored = 0;
-        facing = Vector2.Perpendicular((rightPost - leftPost).normalized);
+        //facing = Vector2.Perpendicular((rightPost - leftPost).normalized);
     }
 
     public Vector2 Center()

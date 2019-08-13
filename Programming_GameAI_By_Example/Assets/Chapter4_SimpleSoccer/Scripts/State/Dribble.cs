@@ -17,7 +17,7 @@ public class Dribble : State<FieldPlayer>
     }
     public override void Enter(FieldPlayer player)
     {
-        player.Team().SetControllingPlayer(player.transform.parent.gameObject);
+        player.Team().SetControllingPlayer(player.gameObject);
     }
 
     public override void Execute(FieldPlayer player)
@@ -27,22 +27,25 @@ public class Dribble : State<FieldPlayer>
         // If Ball is located in side of Home goal position, and player heading at home goal.
         if (_dot < 0)
         {
-            Vector2 direction = player.Heading();
+            Vector2 direction = -player.Heading();
             float sign = Vector2.Dot(player.Team().HomeGoal().Facing(), player.Heading());
             sign = sign > 0 ? 1f : -1f;
             float angle = Mathf.PI / 4 * -1 * sign;
 
             player.transform.Rotate(direction, angle);
 
-            const float kickingForce = .3f;
-
+            const float kickingForce = .2f;
+            print("Drilble1 1 " + kickingForce);
+            player.Ball().SetOwner(player.gameObject);
             player.Ball().Kick(direction, kickingForce);
 
         }
         // Kick the ball to home goal area.
         else
         {
-            player.Ball().Kick(player.Team().HomeGoal().Facing(), Prm.instance.MaxDribbleForce);
+            print("Drilble2  " + Prm.instance.MaxDribbleForce);
+            player.Ball().SetOwner(player.gameObject);
+            player.Ball().Kick(player.Team().HomeGoal().Facing(), .5f);
         }
         //Player has to chase the ball after short term kicking.
         player.GetFSM().ChangeState(ChaseBall.instance);
@@ -52,6 +55,6 @@ public class Dribble : State<FieldPlayer>
 
     public override void Exit(FieldPlayer player)
     {
-        // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
+     
     }
 }

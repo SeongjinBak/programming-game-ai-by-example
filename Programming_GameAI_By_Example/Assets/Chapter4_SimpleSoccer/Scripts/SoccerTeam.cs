@@ -12,7 +12,8 @@ public class SoccerTeam : MonoBehaviour
     private GameObject controllingPlayer;
     [SerializeField]
     private GameObject supportingPlayer;
-   
+    [SerializeField]
+    SoccerBall ball;
     [SerializeField]
     // Instance of FSM
     private StateMachine<SoccerTeam> m_pStateMachine;
@@ -24,10 +25,32 @@ public class SoccerTeam : MonoBehaviour
     public Goal homeGoal;
     public Vector2[] initialRegion = new Vector2[5];
     public List<GameObject> players;
+    [Header("Current_State")]
+    [SerializeField]
+    private string state;
+    [SerializeField]
+    private float distToBallOfClosestPlayer;
     private void Awake()
     {
         //players = new List<GameObject>();
     }
+
+    public void CurStateForDebug()
+    {
+        if (m_pStateMachine.IsInstate(Defending.instance))
+        {
+            state = "Defending";   
+        }
+        else if (m_pStateMachine.IsInstate(Attacking.instance))
+        {
+            state = "Attacking";
+        }
+        else
+        {
+            state = "Nothing";
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,20 +78,65 @@ public class SoccerTeam : MonoBehaviour
         // Set the FSM
         m_pStateMachine = new StateMachine<SoccerTeam>(this);
         m_pStateMachine.SetCurrentState(PrepareForKickOff.instance);
-       // m_pStateMachine.SetGlobalState(MinerGlobalState.instance);
+        // m_pStateMachine.SetGlobalState(MinerGlobalState.instance);
 
 
-
+        ball = GameObject.Find("Ball").GetComponent<SoccerBall>();
         //ChangeState(EnterMineAndDigForNugget.instance);
         StartCoroutine(Updating());
     }
 
+    void CheckItIsOurTeam()
+    {
+        //  bool flag = false;
+        if (controllingPlayer != null)
+        {
+            if (controllingPlayer != ball.GetOwner())
+            {
+                controllingPlayer = null;
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (ball.GetOwner() == players[i])
+                {
+                    controllingPlayer = players[i];
+                }
+            }
+        }
+    }
     
     public IEnumerator Updating()
     {
-        yield return null;
-        m_pStateMachine.Updating();
-        
+        while (true)
+        {
+            CalculateClosestPlayerToBall();
+            yield return null;
+            CurStateForDebug();
+            m_pStateMachine.Updating();
+            CheckItIsOurTeam();
+        }
+    }
+
+    public void CalculateClosestPlayerToBall()
+    {
+        float closestSoFar = 987654321f;
+
+        foreach(var item in players)
+        {
+            PlayerBase pb = item.GetComponent<PlayerBase>();
+            float dist = Vector2.Distance(pb.transform.position, SoccerPitch.instance.ball.transform.position);
+            item.GetComponent<PlayerBase>().SetDistToBall(dist);
+            if(dist< closestSoFar)
+            {
+                closestSoFar = dist;
+                playerClosestToBall = item;
+            }
+        }
+        distToBallOfClosestPlayer = closestSoFar;
     }
 
     public bool IsOpponentWithInRadius(Vector2 pos, float rad)
@@ -102,11 +170,11 @@ public class SoccerTeam : MonoBehaviour
     public void RequestPass(FieldPlayer requester)
     {
         float randFloat = Random.Range(0f, 1f);
-        if (randFloat > .1f) return;
+        if (randFloat > .5f) return;
         if (IsPassSafeFromAllOpponents(ControllingPlayer().transform.position, requester.transform.position, requester.gameObject, Prm.instance.MaxPassingForce))
         {
             Debug.Log("패스요청 메시지 처리하는 기능 구현완료. 테스트 필요하다..");
-            MessageDispatcher_CH4.instance.DispatchMessage(0f, ControllingPlayer().GetComponent<FieldPlayer>().ID(), requester.ID(), SoccerMessages.Msg_PassToMe);
+            MessageDispatcher_CH4.instance.DispatchMessage(0f, ControllingPlayer().GetComponent<FieldPlayer>().ID(), requester.ID(), SoccerMessages.Msg_PassToMe, requester.transform);
         }
     }
 
@@ -118,9 +186,9 @@ public class SoccerTeam : MonoBehaviour
 
         foreach(var item in players)
         {
-            if(item.GetComponent<PlayerBase>().Role() == "Attacker" && item.GetComponent<FieldPlayer>() != ControllingPlayer())
+            if(item.GetComponent<PlayerBase>().Role() == "Attacker" && item != ControllingPlayer())
             {
-                Debug.Log("bestSupportSpot 은 맨 처음 0,0 으로 설정되어 있음.. 확인 필요하다.: "+ SupportSpotCalculator.instance.bestSupportSpot);
+                //Debug.Log("bestSupportSpot 은 맨 처음 0,0 으로 설정되어 있음.. 확인 필요하다.: "+ SupportSpotCalculator.instance.bestSupportSpot);
                 float dist = Vector2.Distance(item.transform.position, SupportSpotCalculator.instance.bestSupportSpot);
                 if(dist < closestSoFar)
                 {
@@ -168,8 +236,12 @@ public class SoccerTeam : MonoBehaviour
                 if (fp.GetFSM().IsInstate(Wait.instance) || fp.GetFSM().IsInstate(ReturnToHomeRegion.instance))
                 {
                     //Debug.Log("원래는 fp.steering().settarget(~~)\n https://github.com/wangchen/Programming-Game-AI-by-Example-src/blob/master/Buckland_Chapter4-SimpleSoccer/SoccerTeam.cpp");
-                    
-                    fp.gameObject.GetComponent<PlayerBase>().Steering().SetTarget(fp.HomeRegion());
+
+                    if (fp.Team().teamColor == TeamColor.Blue)
+                        fp.Steering().SetTarget((fp.Team().initialRegion[fp.ID() - 6]));
+                    else
+                        fp.Steering().SetTarget((fp.Team().initialRegion[fp.ID() - 1]));
+                //    fp.gameObject.GetComponent<PlayerBase>().Steering().SetTarget(fp.HomeRegion());
                 }
 
             }
@@ -225,7 +297,7 @@ public class SoccerTeam : MonoBehaviour
     public bool FindPass(PlayerBase passer, PlayerBase receiver, ref Vector2 passTarget, float power, float minPassingDistance)
     {
         float closestToGoalSoFar = 987654321f;
-        Vector2 target = Vector2.zero;
+        Vector2 target = new Vector2(0f,0f);
 
         foreach(var item in players)
         {
@@ -279,8 +351,8 @@ public class SoccerTeam : MonoBehaviour
         interceptRange *= scalingFactor;
 
         Vector2 ip1, ip2;
-        ip1 = new Vector2();
-        ip2 = new Vector2();
+        ip1 = new Vector2(0, 0);
+        ip2 = new Vector2(0,0);
         GetTangentPoints(receiver.transform.position, interceptRange, SoccerPitch.instance.ball.transform.position, ref ip1, ref ip2);
 
         const int numPassesToTry = 3;
@@ -311,6 +383,7 @@ public class SoccerTeam : MonoBehaviour
         return result;
     }
 
+    public Vector2 GetSupportSpot(TeamColor team) { return SupportSpotCalculator.instance.GetBestSupportingSpot(team); }
     public Goal HomeGoal() { return homeGoal; }
 
     public bool CanShoot(Vector2 ballPos, float power, ref Vector2 shotTarget)
@@ -320,21 +393,34 @@ public class SoccerTeam : MonoBehaviour
         while (numAttempts-- > 0)
         {
             shotTarget = opponentsGoal.Center();
-
+            
             int minYVal = (int)(opponentsGoal.RightPost().y + .15f);
             int maxYVal = (int)(opponentsGoal.LeftPost().y - .15f);
-            Debug.Log("책과 다르게 한 부분. ");
+           // Debug.Log("책과 다르게 한 부분. ");
             shotTarget.y = (float)Random.Range(minYVal, maxYVal);
-
-            float time = GameObject.Find("Ball").GetComponent<SoccerBall>().TimeToCoverDistance(ballPos, shotTarget, power);
+            /*
+            int minYVal = (int)(opponentsGoal.RightPost().x + .15f);
+            int maxYVal = (int)(opponentsGoal.LeftPost().x - .15f);
+            //Debug.Log("책과 다르게 한 부분. ");
+            shotTarget.x = (float)Random.Range(minYVal, maxYVal);
+            */
+            float time = ball.TimeToCoverDistance(ballPos, shotTarget, power);
 
             if(time >= 0f)
             {
+               
                 if(IsPassSafeFromAllOpponents(ballPos, shotTarget, null, power))
                 {
                     return true;
                 }
             }
+            if ((ballPos - shotTarget).magnitude < 20f)
+            {
+                //Debug.Log("COUD: SHOOT");
+                return false;
+
+            }
+
         }
         return false;
     }
@@ -344,9 +430,18 @@ public class SoccerTeam : MonoBehaviour
     {
         Vector2 toTarget = target - from;
         Vector2 toTargetNormalized = toTarget.normalized;
-        Vector2 localPosOpp = receiver.transform.InverseTransformVector(opp.transform.position);
-        Debug.Log(localPosOpp);
-   
+
+        Vector2 localPosOpp = new Vector2(0, 0);
+        if (receiver)
+        {
+            localPosOpp.x = receiver.transform.position.x;
+            localPosOpp.y = receiver.transform.position.y;
+
+        //    localPosOpp.x = receiver.transform.InverseTransformVector(opp.transform.position).x;
+         //   localPosOpp.y = receiver.transform.InverseTransformVector(opp.transform.position).y;
+        }
+
+
 
         if (localPosOpp.x < 0)
         {
@@ -361,25 +456,32 @@ public class SoccerTeam : MonoBehaviour
                 {
                     return true;
                 }
-                else return false;
+                else
+                    return false;
+            }
+            else
+            {
+                return true;
             }
         }
-        else
-        {
-            return true;
-        }
-
-        SoccerBall ball = GameObject.Find("Ball").GetComponent<SoccerBall>();
+        
+      
+        //SoccerBall ball = GameObject.Find("Ball").GetComponent<SoccerBall>();
         float timeForBall =
-            ball.TimeToCoverDistance(new Vector2(0, 0), new Vector2(localPosOpp.x, 0), passingForce);
-        Debug.Log("상대 플레이어의 MAX SPEED는 " + opp.GetComponent<PlayerBase>().myMaxSpeed + " 로 설정됨.");
-        float reach = opp.GetComponent<PlayerBase>().myMaxSpeed * timeForBall + .15f + .3f;
+            ball.TimeToCoverDistance(new Vector2(0, 0), target, passingForce);
+        
 
-        if (Mathf.Abs(localPosOpp.y) < reach)
+
+        float reach = opp.GetComponent<PlayerBase>().myMaxSpeed / Random.Range(4.9f, 5.2f)  * timeForBall + .4f + .3f;
+        float expectedBall = timeForBall * Prm.instance.MaxShootingForce + .4f + .3f;
+        //Debug.Log("Time for ball " + expectedBall + " Reach : " + reach + " BALLTUNE : " + timeForBall);
+        if (expectedBall < reach)
         {
+            
             return false;
         }
-        else return true;
+        else
+            return true;
     }
 
 
@@ -388,16 +490,16 @@ public class SoccerTeam : MonoBehaviour
         string color = "";
         if (TeamColor.Red == teamColor)
         {
-            color = "red";
+            color = "BlueTeam";
         }
-        else color = "brue";
+        else color = "RedTeam";
 
-        var group = GameObject.Find(color).GetComponentsInChildren<GameObject>();
-        List<GameObject> opponents = new List<GameObject>(group);
-
+        var group = GameObject.Find(color).GetComponentsInChildren<PlayerBase>();
+        List<PlayerBase> opponents = new List<PlayerBase>(group);
+        opponents.RemoveAt(0);
         foreach(var item in opponents)
         {
-            if (IsPassSafeFromOpponent(from, target, receiver, item, passingForce))
+            if (!IsPassSafeFromOpponent(from, target, receiver, item.gameObject, passingForce))
             {
                 return false;
             }

@@ -20,25 +20,30 @@ public class KickBall : State<FieldPlayer>
     {
         bool flag = false;
         int num = Prm.instance.PlayerKickFrequency;
-        WaitForSeconds ws = new WaitForSeconds(Time.deltaTime / num);
-        Debug.Log(ws + " 번당 1번 킥 시도함. p185참고..!");
+        WaitForSeconds ws = new WaitForSeconds((float)(0.8f / num));
+        //Debug.Log(ws + " 번당 1번 킥 시도함. p185참고..! + ws : " + (float)1/num);
         for (int i = 0; i < num; i++)
         {
             if(Random.Range(0f,1f)< .8f)
             {
                 flag = true;
                 Debug.Log(fp.gameObject.name + " 킥 성공 at " + Time.time);
+               // yield return new WaitForSeconds((float)(0.8 / Prm.instance.PlayerKickFrequency) * (num - i));
                 break;
             }
             yield return ws;
         }
-        if(!flag)
+        if (!flag)
+        {
+            Debug.Log("킥 실패 후 Chase 상태로 돌입.");
             fp.GetFSM().ChangeState(ChaseBall.instance);
+        }
+            
     }
 
     public override void Enter(FieldPlayer player)
     {
-        player.Team().SetControllingPlayer(player.transform.parent.gameObject);
+        player.Team().SetControllingPlayer(player.gameObject);
         StartCoroutine(ReadyForKick(player));
         
     }
@@ -53,28 +58,33 @@ public class KickBall : State<FieldPlayer>
     {
         Vector2 toBall = player.Ball().transform.position - player.transform.position;
         float _dot = Vector2.Dot(player.Heading(), toBall.normalized);
-        Debug.Log("KickBall 에서, _dot은 Heading()을 사용하는데 우리가 Heading()값을 바꾸는것을 했는지?\n 아니라면, 그냥 x좌표로만 앞뒤 판별 가능하다.\n근데 _dot은 아래서 power계산에쓰임..");
-        if(player.Team().Receiver()!=null || player.Pitch().GoalKeeperHasBall() | _dot < 0)
+        //Debug.Log("KickBall 에서, _dot은 Heading()을 사용하는데 우리가 Heading()값을 바꾸는것을 했는지?\n 아니라면, 그냥 x좌표로만 앞뒤 판별 가능하다.\n근데 _dot은 아래서 power계산에쓰임..");
+        if(player.Team().Receiver()!=null || player.Pitch().GoalKeeperHasBall() || _dot < 0)
         {
             player.GetFSM().ChangeState(ChaseBall.instance);
+            return;
         }
 
         // if a shot is possible, 
-        Vector2 ballTarget = Vector2.zero;
+        Vector2 ballTarget = new Vector2(0f,0f);
 
         float power = Prm.instance.MaxShootingForce * _dot;
-
+        float rf = Random.Range(0f, 1f);
         if (player.Team().CanShoot(player.Ball().transform.position, power, ref ballTarget) ||
-            Random.Range(0f, 1f) < Prm.instance.ChancePlayerAttemptsPotShot)
+            rf < Prm.instance.ChancePlayerAttemptsPotShot)
         {
             ballTarget = AddNoiseToKick(player.Ball().transform.position, ballTarget);
+            print(ballTarget + " 볼 목표!");
+           // ballTarget.Normalize();
+            Vector2 kickDirection = (ballTarget - (Vector2)player.Ball().transform.position);
 
-
-            Vector2 kickDirection = ballTarget - (Vector2)player.Ball().transform.position;
-
-            player.Ball().Kick(kickDirection, power);
-
+            player.Ball().SetOwner(player.gameObject);
+            player.Ball().Kick((kickDirection), power);
+            if (rf < Prm.instance.ChancePlayerAttemptsPotShot)
+                print("뻥축구!");
+            Debug.Log(kickDirection + " " + ballTarget + " " + power + " from Player # " + player.name);
             player.GetFSM().ChangeState(Wait.instance);
+            player.Ball().SetOwner(null);
 
             player.FindSupport();
             return;
@@ -90,6 +100,8 @@ public class KickBall : State<FieldPlayer>
         {
             ballTarget = AddNoiseToKick(player.Ball().transform.position, ballTarget);
             Vector2 kickDirection = ballTarget - (Vector2)player.Ball().transform.position;
+
+            player.Ball().SetOwner(player.gameObject);
             player.Ball().Kick(kickDirection, power);
             GameObject ballTargetTr = new GameObject(); 
             ballTargetTr.transform.position = ballTarget;
@@ -108,6 +120,7 @@ public class KickBall : State<FieldPlayer>
 
     public override void Exit(FieldPlayer player)
     {
-        // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
+
+        //player.Team().SetControllingPlayer(null);
     }
 }

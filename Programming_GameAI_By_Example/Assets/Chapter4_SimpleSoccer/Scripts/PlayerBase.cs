@@ -13,7 +13,10 @@ public class PlayerBase : MovingEntity_CH4
     public Vector2 homeRegion;
     [SerializeField]
     private Steering_CH4 steering;
+    [SerializeField]
     private SoccerBall soccerBall;
+    [SerializeField]
+    private float distToBall;
     // Start is called before the first frame update
     void Awake()
     {
@@ -44,6 +47,7 @@ public class PlayerBase : MovingEntity_CH4
     void Update()
     {
         SetPos(transform.position);
+        v_heading = (Steering().Force().normalized);
     }
 
     public bool HandleMessage(Telegram_CH4 msg)
@@ -57,14 +61,21 @@ public class PlayerBase : MovingEntity_CH4
 
     }
   
-
+    public float DistToBall()
+    {
+        return distToBall;
+    }
+    public void SetDistToBall(float num)
+    {
+        distToBall = num;
+    }
     public SoccerTeam Team()
     {
         return transform.parent.GetComponent<SoccerTeam>();
     }
     public bool IsClosestTeamMemberToBall()
     {
-        return Team().PlayerClosestToBall() == this;
+        return Team().PlayerClosestToBall() == this.GetComponent<PlayerBase>();
     }
 
     public Steering_CH4 Steering()
@@ -88,7 +99,7 @@ public class PlayerBase : MovingEntity_CH4
     }
     public bool IsControllingPlayer()
     {
-        return Team().ControllingPlayer() == this;
+        return Team().ControllingPlayer() == this.gameObject;
     }
     public Vector2 HomeRegion()
     {
@@ -106,11 +117,12 @@ public class PlayerBase : MovingEntity_CH4
     }
     public SoccerPitch Pitch()
     {
-        return GameObject.Find("SoccerPitch").GetComponent<SoccerPitch>();
+        return SoccerPitch.instance;
     }
     public void TrackBall()
     {
-        transform.LookAt(Ball().transform.position);
+        Debug.Log("TrackBall y축 회전되어서 그냥 꺼뒀음");
+        //transform.LookAt(Ball().transform.position);
     }
     public string Role()
     {
@@ -150,7 +162,7 @@ public class PlayerBase : MovingEntity_CH4
         if(Team().SupportingPlayer() == null)
         {
             PlayerBase _bestSupportPlayer = Team().DetermineBestSupportingAttacker();
-            Team().SetSuppprtingPlayer(_bestSupportPlayer.transform.parent.gameObject);
+            Team().SetSuppprtingPlayer(_bestSupportPlayer.gameObject);
             MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(), SoccerMessages.Msg_SupportAttacker, null);
 
         }
@@ -163,7 +175,7 @@ public class PlayerBase : MovingEntity_CH4
                 MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(),SoccerMessages.Msg_GoHome);
             }
 
-            Team().SetSuppprtingPlayer(bestSupportPlayer.transform.parent.gameObject);
+            Team().SetSuppprtingPlayer(bestSupportPlayer.gameObject);
 
             MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(), SoccerMessages.Msg_SupportAttacker);
 

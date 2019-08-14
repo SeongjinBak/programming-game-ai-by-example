@@ -17,8 +17,9 @@ public class SoccerTeam : MonoBehaviour
     [SerializeField]
     // Instance of FSM
     private StateMachine<SoccerTeam> m_pStateMachine;
-    
-    
+
+
+
     public TeamColor teamColor;
     public SoccerTeam opponentTeam;
     public Goal opponentsGoal;
@@ -121,6 +122,11 @@ public class SoccerTeam : MonoBehaviour
         }
     }
 
+    public float DistToBallOfClosestPlayer()
+    {
+        return distToBallOfClosestPlayer;
+    }
+
     public void CalculateClosestPlayerToBall()
     {
         float closestSoFar = 987654321f;
@@ -161,8 +167,12 @@ public class SoccerTeam : MonoBehaviour
             PlayerBase pb = item.GetComponent<PlayerBase>();
             if (pb.Role() != "GoalKeeper")
             {
-                Debug.Log("Go Home 메시지 코드 추가했으나 의문 : sender 1이고, Msg 핸들러가 player에는 없다 아직까진.");
-                MessageDispatcher_CH4.instance.DispatchMessage(0f, 1, pb.ID(), SoccerMessages.Msg_GoHome, null);
+               
+                if(teamColor == TeamColor.Red)
+                    MessageDispatcher_CH4.instance.DispatchMessage(0f, 1, pb.ID(), SoccerMessages.Msg_GoHome, null);
+                else
+                    MessageDispatcher_CH4.instance.DispatchMessage(0f, 6, pb.ID(), SoccerMessages.Msg_GoHome, null);
+
             }
         }
     }
@@ -303,13 +313,15 @@ public class SoccerTeam : MonoBehaviour
         {
             if((item.GetComponent<PlayerBase>() != passer) && Vector2.Distance(passer.transform.position, item.transform.position) > minPassingDistance)
             {
+                Debug.Log(receiver + "  확인중");
                 if (GetBestPassToReceiver(passer, item.GetComponent<PlayerBase>(), ref target, power)){
                     float dist2Goal = Mathf.Abs(target.x - opponentsGoal.Center().x);
-
-                    if(dist2Goal < closestToGoalSoFar)
+                    
+                    if (dist2Goal < closestToGoalSoFar)
                     {
                         closestToGoalSoFar = dist2Goal;
                         receiver = item.GetComponent<PlayerBase>();
+                        Debug.Log(receiver + "  확인됨");
                         passTarget = target;
                     }
                 }
@@ -437,8 +449,8 @@ public class SoccerTeam : MonoBehaviour
             localPosOpp.x = receiver.transform.position.x;
             localPosOpp.y = receiver.transform.position.y;
 
-        //    localPosOpp.x = receiver.transform.InverseTransformVector(opp.transform.position).x;
-         //   localPosOpp.y = receiver.transform.InverseTransformVector(opp.transform.position).y;
+         //   localPosOpp.x = receiver.transform.InverseTransformVector(opp.transform.position).x;
+          // localPosOpp.y = receiver.transform.InverseTransformVector(opp.transform.position).y;
         }
 
 

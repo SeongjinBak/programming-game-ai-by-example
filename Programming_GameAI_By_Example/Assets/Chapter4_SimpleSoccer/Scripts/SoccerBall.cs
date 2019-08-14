@@ -46,7 +46,7 @@ public class SoccerBall : MovingEntity_CH4
         {
             oldPos = transform.position;
             
-            velocity += (velocity).normalized * -0.05f;
+            velocity += (velocity).normalized * -0.03f;
             
             transform.position = (Vector2)transform.position + velocity;
 

@@ -280,7 +280,7 @@ public class Steering_CH4 : MonoBehaviour
 
     public void SeperationOn() { flags |= (int)behavior_type.separation; separate = true; }
 
-    public void InterposeOn() { flags |= (int)behavior_type.interpose; interpose = true; }
+    public void InterposeOn(float d) { flags |= (int)behavior_type.interpose; interpose = true; interposeDist = d; }
 
     public void SeekOff() { flags ^= (int)behavior_type.seek; seek = false; }
 

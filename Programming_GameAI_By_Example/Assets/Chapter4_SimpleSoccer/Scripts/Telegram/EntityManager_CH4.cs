@@ -7,7 +7,7 @@ public class EntityManager_CH4 : MonoBehaviour
     // Singleton design pattern implementation.
     public static EntityManager_CH4 instance = null;
     [SerializeField]
-    private Dictionary<int, FieldPlayer> m_EntityMap;
+    private Dictionary<int, PlayerBase> m_EntityMap;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class EntityManager_CH4 : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
-        m_EntityMap = new Dictionary<int, FieldPlayer>();
+        m_EntityMap = new Dictionary<int, PlayerBase>();
     }
 
     // Same as ' = ' operator
@@ -28,14 +28,14 @@ public class EntityManager_CH4 : MonoBehaviour
         return em;
     }
 
-    public void RegisterEntity(FieldPlayer newEntity)
+    public void RegisterEntity(PlayerBase newEntity)
     {
         m_EntityMap.Add((newEntity as BaseGameEntity_CH3).ID(), newEntity);
         Debug.Log("\nEntity Register done with succeed ID : " +(newEntity as BaseGameEntity_CH3).ID());
 
     }
 
-    public FieldPlayer GetEntityFromID(int id)
+    public PlayerBase GetEntityFromID(int id)
     {
         return m_EntityMap[id];
     }

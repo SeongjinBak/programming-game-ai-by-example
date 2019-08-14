@@ -25,6 +25,7 @@ public class Prm : MonoBehaviour
     public float PlayerKickingDistance = .2f;
     public float MinPassDist = 1f;
     public float MaxDribbleForce = .6f;
+    public float GoalKeeperTendingDistance = 2f;
     [Header("Strength")]
     public float Spot_PassSafeStrength = 2f;
     public float Spot_CanScoreStrength = 1f;
@@ -38,5 +39,10 @@ public class Prm : MonoBehaviour
     public float BallWithinReceivingRange = 2f;
     public float PlayerKickingAccuracy = 0.99f;
     public float PlayerComfortZone = 2.0f;
+
+    [Header("KEEPER")]
+    public float KeeperInBallRange = .5f;
+    public float GoalKeeperInterceptRange = 2f;
+    public float GoalKeeperMinPassDist = 8f;
 
 }

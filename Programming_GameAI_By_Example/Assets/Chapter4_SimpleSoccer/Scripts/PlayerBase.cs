@@ -101,6 +101,13 @@ public class PlayerBase : MovingEntity_CH4
     {
         return Team().ControllingPlayer() == this.gameObject;
     }
+    public bool InHomeRegion()
+    {
+        if (Team().teamColor == TeamColor.Red)
+            return ((int)transform.position.x == (int)Team().initialRegion[ID() - 1].x && (int)transform.position.y == (int)Team().initialRegion[ID() - 1].y);
+        else
+            return ((int)transform.position.x == (int)Team().initialRegion[ID() - 6].x && (int)transform.position.y == (int)Team().initialRegion[ID() - 6].y);
+    }
     public Vector2 HomeRegion()
     {
         return homeRegion;
@@ -121,7 +128,7 @@ public class PlayerBase : MovingEntity_CH4
     }
     public void TrackBall()
     {
-        Debug.Log("TrackBall y축 회전되어서 그냥 꺼뒀음");
+       // Debug.Log("TrackBall y축 회전되어서 그냥 꺼뒀음");
         //transform.LookAt(Ball().transform.position);
     }
     public string Role()
@@ -155,6 +162,11 @@ public class PlayerBase : MovingEntity_CH4
             }
         }
         return false;
+    }
+
+    public bool IsClosestPlayerOnPitchToBall()
+    {
+        return IsClosestTeamMemberToBall() && (Vector2.Distance(Ball().transform.position, transform.position) < Team().opponentTeam.DistToBallOfClosestPlayer());
     }
 
     public void FindSupport()

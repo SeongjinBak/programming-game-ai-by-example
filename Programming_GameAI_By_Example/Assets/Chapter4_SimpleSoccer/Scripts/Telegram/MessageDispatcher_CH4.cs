@@ -47,8 +47,14 @@ public class MessageDispatcher_CH4 : MonoBehaviour
             Debug.Log("Empty Msg Detected");
         }
     }
-    
-    
+
+    private void Discharge(GoalKeeper pReceiver, Telegram_CH4 msg = null)
+    {
+        if (msg == null || !pReceiver.HandleMessage(msg))
+        {
+            Debug.Log("Empty Msg Detected");
+        }
+    }
 
 
     public void DispatchMessage(float delay, int sender, int receiver, int msg, Transform info = null)
@@ -58,7 +64,10 @@ public class MessageDispatcher_CH4 : MonoBehaviour
 
         if(delay <= 0.0f)
         {
-            Discharge(EntityManager_CH4.instance.GetEntityFromID(receiver), telegram);
+            if(receiver != 1 || receiver != 6)
+                Discharge(EntityManager_CH4.instance.GetEntityFromID(receiver) as FieldPlayer, telegram);
+            else
+                Discharge(EntityManager_CH4.instance.GetEntityFromID(receiver) as GoalKeeper, telegram);
         }
         else
         {
@@ -75,26 +84,7 @@ public class MessageDispatcher_CH4 : MonoBehaviour
     // This method should be called from Main loop of the Game.
     public void DispatchDelayedMessages()
     {
-        // Get a current time.
-        double currentTime = Time.time;
-        if(priorityQ.Count() > 0)
-        {
-            while ((priorityQ.Peek().DispatchTime < currentTime) && (priorityQ.Peek().DispatchTime > 0))
-            {
-                // Get Front of the queue.
-                Telegram_CH4 telegram = priorityQ.Peek();
-                // Find Receiver.
-                FieldPlayer pReceiver = EntityManager_CH4.instance.GetEntityFromID(telegram.Receiver);
-                // Send Telegram to recevier
-                Discharge(pReceiver, telegram);
-                // Pop the telegram from queue.
-                priorityQ.Dequeue();
-                if(priorityQ.Count() == 0)
-                {
-                    break;
-                }
-            }
-        }
+        
         
     }
    

@@ -1328,8 +1328,8 @@ GameObject:
   m_Component:
   - component: {fileID: 284218644}
   - component: {fileID: 284218645}
+  - component: {fileID: 284218649}
   - component: {fileID: 284218646}
-  - component: {fileID: 284218647}
   - component: {fileID: 284218648}
   m_Layer: 9
   m_Name: 1
@@ -1426,33 +1426,6 @@ MonoBehaviour:
   steering: {fileID: 0}
   soccerBall: {fileID: 0}
   distToBall: 0
---- !u!114 &284218647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284218643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d00215db12da7c4e8becb3ab4df7be8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  _pos: {x: 0, y: 0}
-  v_velocity: {x: 0, y: 0}
-  v_heading: {x: 0, y: 0}
-  v_side: {x: 0, y: 0}
-  mass: 0
-  myMaxSpeed: 10
-  myMaxTurnRate: 2
-  myMaxForce: {x: 10, y: 10}
-  playerRole: 
-  homeRegion: {x: 0, y: 0}
-  steering: {fileID: 0}
-  soccerBall: {fileID: 1503479389}
-  distToBall: 0
-  state: 
 --- !u!114 &284218648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1479,6 +1452,33 @@ MonoBehaviour:
   viewDistance: 0
   flags: 0
   tagged: 0
+--- !u!114 &284218649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284218643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12eb71c59d8b7a46969b03582824ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  _pos: {x: 0, y: 0}
+  v_velocity: {x: 0, y: 0}
+  v_heading: {x: 0, y: 0}
+  v_side: {x: 0, y: 0}
+  mass: 0
+  myMaxSpeed: 10
+  myMaxTurnRate: 2
+  myMaxForce: {x: 10, y: 10}
+  playerRole: 
+  homeRegion: {x: 0, y: 0}
+  steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!1 &284723704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,7 +2519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12154cc64fec8b546ab24454982b9851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPassingForce: 1
+  MaxPassingForce: 1.2
   MaxShootingForce: 2
   PlayerMaxSpeedWithBall: 1.2
   PlayerMaxSpeedWithoutBall: 1.6
@@ -2527,6 +2527,7 @@ MonoBehaviour:
   PlayerKickingDistance: 0.2
   MinPassDist: 2
   MaxDribbleForce: 0.6
+  GoalKeeperTendingDistance: 2
   Spot_PassSafeStrength: 2
   Spot_CanScoreStrength: 1
   Spot_DistFromControllingPlayerStrength: 2
@@ -2537,6 +2538,9 @@ MonoBehaviour:
   BallWithinReceivingRange: 3
   PlayerKickingAccuracy: 0.99
   PlayerComfortZone: 3
+  KeeperInBallRange: 1.45
+  GoalKeeperInterceptRange: 5.12
+  GoalKeeperMinPassDist: 6.1
 --- !u!1 &692474814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,6 +2676,101 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: {x: 0, y: 0}
   score: 0
+--- !u!1 &716194336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716194337}
+  - component: {fileID: 716194342}
+  - component: {fileID: 716194341}
+  - component: {fileID: 716194340}
+  - component: {fileID: 716194339}
+  - component: {fileID: 716194338}
+  m_Layer: 0
+  m_Name: KeeperState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &716194337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &716194338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4bf0aca6df1e894b8a5ba6cf3ef350b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716194339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22997575530b51c4c9590eebac3a633b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716194340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646c53160e826e9438a247646b5d7f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716194341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2204f47a9800ec846a92298e4a9f9a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716194342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716194336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e2b53f127e4134eb49eec18df93ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &761986444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5346,8 +5445,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1441649551}
   - component: {fileID: 1441649552}
+  - component: {fileID: 1441649556}
   - component: {fileID: 1441649553}
-  - component: {fileID: 1441649554}
   - component: {fileID: 1441649555}
   m_Layer: 9
   m_Name: 1
@@ -5364,7 +5463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441649550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.2, y: 0, z: 0}
+  m_LocalPosition: {x: 18.13, y: 0, z: 0}
   m_LocalScale: {x: 0.14999999, y: 0.14999999, z: 1}
   m_Children: []
   m_Father: {fileID: 1810355137}
@@ -5444,33 +5543,6 @@ MonoBehaviour:
   steering: {fileID: 0}
   soccerBall: {fileID: 0}
   distToBall: 0
---- !u!114 &1441649554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441649550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d00215db12da7c4e8becb3ab4df7be8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 6
-  _pos: {x: 0, y: 0}
-  v_velocity: {x: 0, y: 0}
-  v_heading: {x: 0, y: 0}
-  v_side: {x: 0, y: 0}
-  mass: 0
-  myMaxSpeed: 10
-  myMaxTurnRate: 2
-  myMaxForce: {x: 10, y: 10}
-  playerRole: 
-  homeRegion: {x: 0, y: 0}
-  steering: {fileID: 0}
-  soccerBall: {fileID: 1503479389}
-  distToBall: 0
-  state: 
 --- !u!114 &1441649555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5497,6 +5569,33 @@ MonoBehaviour:
   viewDistance: 0
   flags: 0
   tagged: 0
+--- !u!114 &1441649556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441649550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12eb71c59d8b7a46969b03582824ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 6
+  _pos: {x: 0, y: 0}
+  v_velocity: {x: 0, y: 0}
+  v_heading: {x: 0, y: 0}
+  v_side: {x: 0, y: 0}
+  mass: 0
+  myMaxSpeed: 10
+  myMaxTurnRate: 2
+  myMaxForce: {x: 10, y: 10}
+  playerRole: 
+  homeRegion: {x: 0, y: 0}
+  steering: {fileID: 0}
+  soccerBall: {fileID: 1503479389}
+  distToBall: 0
+  state: 
 --- !u!1 &1441996429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6957,7 +7056,7 @@ MonoBehaviour:
   teamColor: 1
   opponentTeam: {fileID: 0}
   opponentsGoal: {fileID: 0}
-  homeGoal: {fileID: 0}
+  homeGoal: {fileID: 1446291127}
   initialRegion:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -7643,7 +7742,7 @@ MonoBehaviour:
   teamColor: 0
   opponentTeam: {fileID: 0}
   opponentsGoal: {fileID: 0}
-  homeGoal: {fileID: 0}
+  homeGoal: {fileID: 1061170302}
   initialRegion:
   - {x: 0, y: 0}
   - {x: 0, y: 0}

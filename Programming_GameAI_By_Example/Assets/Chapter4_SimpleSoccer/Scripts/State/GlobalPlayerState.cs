@@ -64,7 +64,7 @@ public class GlobalPlayerState : State<FieldPlayer>
                     player.Ball().SetOwner(receiver.gameObject);
 
                     player.Ball().Kick((receiver.transform.position - player.Ball().transform.position).normalized, Prm.instance.MaxPassingForce);
-                    Debug.Log("p179 공 패스 및 메시지 전송 구현 했음. 특이사항 : extra info 로 receiver의 transform을 넘겼음. \n 패스성공");
+                   // Debug.Log("p179 공 패스 및 메시지 전송 구현 했음. 특이사항 : extra info 로 receiver의 transform을 넘겼음. \n 패스성공");
                     MessageDispatcher_CH4.instance.DispatchMessage(0f, player.ID(), receiver.ID(), SoccerMessages.Msg_ReceiveBall, receiver.transform);
 
                     player.GetFSM().ChangeState(Wait.instance);

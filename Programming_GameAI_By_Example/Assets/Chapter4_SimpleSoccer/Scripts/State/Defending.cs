@@ -40,7 +40,7 @@ public class Defending : State<SoccerTeam>
     {
         if (team.InControl())
         {
-            Debug.Log("만약 이 팀이 지금 제어권을 갖고 있다면 incontrol은 true.");
+
             team.GetFSM().ChangeState(Attacking.instance);
             return;
         }

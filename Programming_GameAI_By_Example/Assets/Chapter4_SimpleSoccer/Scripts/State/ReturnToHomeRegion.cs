@@ -22,7 +22,7 @@ public class ReturnToHomeRegion : State<FieldPlayer>
     {
         Debug.Log("\n[Team " + player.transform.parent.GetComponent<SoccerTeam>().teamColor +" "+ player+ "] has Entered ReturnToHomeRegion State!");
         player.Steering().ArriveOn();
-        Debug.Log("내 임의대로 함.. Inside함수를 그냥 레드팀인데 오른쪽필드에 있을경우 왼쪽자리로 가게끔 함.");
+
         if(player.transform.parent.GetComponent<SoccerTeam>().teamColor == TeamColor.Blue)
         {
             if(player.Steering().Target().x < 0f)

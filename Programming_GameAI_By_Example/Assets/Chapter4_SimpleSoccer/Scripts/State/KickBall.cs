@@ -27,8 +27,8 @@ public class KickBall : State<FieldPlayer>
             if(Random.Range(0f,1f)< .8f)
             {
                 flag = true;
-                Debug.Log(fp.gameObject.name + " 킥 성공 at " + Time.time);
-               // yield return new WaitForSeconds((float)(0.8 / Prm.instance.PlayerKickFrequency) * (num - i));
+                Debug.Log(fp.gameObject.name + " Kicking succeed at " + Time.time);
+              
                 break;
             }
             yield return ws;
@@ -84,8 +84,8 @@ public class KickBall : State<FieldPlayer>
                 print("뻥축구!");
             Debug.Log(kickDirection + " " + ballTarget + " " + power + " from Player # " + player.name);
             player.GetFSM().ChangeState(Wait.instance);
-            player.Ball().SetOwner(null);
-
+            //player.Ball().SetOwner(null);
+           
             player.FindSupport();
             return;
         }

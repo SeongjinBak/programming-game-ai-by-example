@@ -28,6 +28,12 @@ public class Wait : State<FieldPlayer>
 
     public override void Execute(FieldPlayer player)
     {
+        if (SoccerPitch.instance.GoalKeeperHasBall())
+        {
+            player.Steering().SetTarget(player.Team().initialRegion[int.Parse(player.name) - 1]);
+            player.Steering().SeekOn();
+            return;
+        }
         if (!player.AtTarget())
         {
             player.Steering().ArriveOn();
@@ -60,6 +66,7 @@ public class Wait : State<FieldPlayer>
 
     public override void Exit(FieldPlayer player)
     {
+        player.Steering().SeekOff();
         // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
     }
 }

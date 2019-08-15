@@ -34,7 +34,8 @@ public class SupportAttacker : State<FieldPlayer>
             player.Steering().ArriveOn();
         }
         Vector2 t = new Vector2();
-        if ( player.Ball().GetOwner() != player.gameObject && player.Team().CanShoot(player.transform.position, Prm.instance.MaxShootingForce,ref t))
+        if ( player.Ball().GetOwner() != player.gameObject && player.Team().CanShoot(player.transform.position, Prm.instance.MaxShootingForce,ref t)
+            && player.Ball().GetOwner () != null && player.Ball().GetOwner().transform.parent.GetComponent<SoccerTeam>().teamColor == player.Team().teamColor)
         {
             Debug.Log(player.name + " 의 PASS 요청 1");
             player.Team().RequestPass(player);
@@ -49,7 +50,8 @@ public class SupportAttacker : State<FieldPlayer>
 
             player.SetVelocity(Vector2.zero);
 
-            if (!player.IsThreatened() && player.Ball().GetOwner() != player.gameObject)
+            if (!player.IsThreatened() && player.Ball().GetOwner() != player.gameObject && player.Ball().GetOwner() != null 
+                && player.Ball().GetOwner().transform.parent.GetComponent<SoccerTeam>().teamColor == player.Team().teamColor)
             {
                 Debug.Log(player.name + " 의 PASS 요청 2");
                 player.Team().RequestPass(player);

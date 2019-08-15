@@ -183,7 +183,6 @@ public class SoccerTeam : MonoBehaviour
         if (randFloat > .5f) return;
         if (IsPassSafeFromAllOpponents(ControllingPlayer().transform.position, requester.transform.position, requester.gameObject, Prm.instance.MaxPassingForce))
         {
-            Debug.Log("패스요청 메시지 처리하는 기능 구현완료. 테스트 필요하다..");
             MessageDispatcher_CH4.instance.DispatchMessage(0f, ControllingPlayer().GetComponent<FieldPlayer>().ID(), requester.ID(), SoccerMessages.Msg_PassToMe, requester.transform);
         }
     }
@@ -198,7 +197,6 @@ public class SoccerTeam : MonoBehaviour
         {
             if(item.GetComponent<PlayerBase>().Role() == "Attacker" && item != ControllingPlayer())
             {
-                //Debug.Log("bestSupportSpot 은 맨 처음 0,0 으로 설정되어 있음.. 확인 필요하다.: "+ SupportSpotCalculator.instance.bestSupportSpot);
                 float dist = Vector2.Distance(item.transform.position, SupportSpotCalculator.instance.bestSupportSpot);
                 if(dist < closestSoFar)
                 {
@@ -260,9 +258,12 @@ public class SoccerTeam : MonoBehaviour
 
     public bool AllPlayersAtHome()
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 1; i < 5; i++)
         {
-            if(initialRegion[i] != (Vector2)gameObject.transform.GetChild(i).transform.position)
+            float x = gameObject.transform.GetChild(i).transform.position.x;
+            float y = gameObject.transform.GetChild(i).transform.position.y;
+
+            if (initialRegion[i].x >= x + 1f || initialRegion[i].x <= x - 1f || initialRegion[i].y >= y + 1f || initialRegion[i].y <= y - 1f)
             {
                 return false;
             }
@@ -313,7 +314,7 @@ public class SoccerTeam : MonoBehaviour
         {
             if((item.GetComponent<PlayerBase>() != passer) && Vector2.Distance(passer.transform.position, item.transform.position) > minPassingDistance)
             {
-                Debug.Log(receiver + "  확인중");
+
                 if (GetBestPassToReceiver(passer, item.GetComponent<PlayerBase>(), ref target, power)){
                     float dist2Goal = Mathf.Abs(target.x - opponentsGoal.Center().x);
                     
@@ -321,7 +322,7 @@ public class SoccerTeam : MonoBehaviour
                     {
                         closestToGoalSoFar = dist2Goal;
                         receiver = item.GetComponent<PlayerBase>();
-                        Debug.Log(receiver + "  확인됨");
+
                         passTarget = target;
                     }
                 }

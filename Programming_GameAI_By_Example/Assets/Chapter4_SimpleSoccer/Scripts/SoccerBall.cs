@@ -51,6 +51,12 @@ public class SoccerBall : MovingEntity_CH4
             transform.position = (Vector2)transform.position + velocity;
 
             v_heading = velocity.normalized;
+
+
+            if(transform.position.x < -24 || transform.position.x > 24 || transform.position.y > 10 || transform.position.y < -10)
+            {
+                velocity = new Vector2(0, 0);
+            }
             yield return new WaitForSeconds(0.05f);
         }
         
@@ -63,7 +69,7 @@ public class SoccerBall : MovingEntity_CH4
 
     public void Kick(Vector2 direction, float force)
     {
-       // velocity = new Vector2(0, 0);
+        velocity = new Vector2(0, 0);
         direction.Normalize();
 
         Vector2 acc = (direction * force) / ballRb.mass;

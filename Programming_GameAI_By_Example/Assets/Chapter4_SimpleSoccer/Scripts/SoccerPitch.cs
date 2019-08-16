@@ -41,6 +41,15 @@ public class SoccerPitch : MonoBehaviour
     //set true to pause the motion
     bool m_bPaused;
 
+    private void Update()
+    {
+        if (Paused() != false)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else Time.timeScale = 1f;
+    }
+
     public bool Inside(Vector2 v)
     {
         if (v.x >= -25f && v.x <= 25f && v.y <=9.3f && v.y >= 9.3f)

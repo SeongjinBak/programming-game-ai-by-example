@@ -28,12 +28,6 @@ public class Wait : State<FieldPlayer>
 
     public override void Execute(FieldPlayer player)
     {
-        if (SoccerPitch.instance.GoalKeeperHasBall())
-        {
-            player.Steering().SetTarget(player.Team().initialRegion[int.Parse(player.name) - 1]);
-            player.Steering().SeekOn();
-            return;
-        }
         if (!player.AtTarget())
         {
             player.Steering().ArriveOn();
@@ -42,12 +36,12 @@ public class Wait : State<FieldPlayer>
         else
         {
             player.Steering().ArriveOff();
-            player.SetVelocity(new Vector2(0f,0f));
+            player.SetVelocity(new Vector2(0f, 0f));
 
             player.TrackBall();
         }
-        
-        if(player.Team().InControl() && !player.IsControllingPlayer() && player.IsAheadOfAttacker())
+
+        if (player.Team().InControl() && !player.IsControllingPlayer() && player.IsAheadOfAttacker())
         {
             player.Team().RequestPass(player);
             return;
@@ -55,13 +49,12 @@ public class Wait : State<FieldPlayer>
 
         if (player.Pitch().GameOn())
         {
-            if(player.IsClosestTeamMemberToBall() && player.Team().Receiver() == null && !player.Pitch().GoalKeeperHasBall())
+            if (player.IsClosestTeamMemberToBall() && player.Team().Receiver() == null && !player.Pitch().GoalKeeperHasBall())
             {
                 player.GetFSM().ChangeState(ChaseBall.instance);
                 return;
             }
         }
-
     }
 
     public override void Exit(FieldPlayer player)

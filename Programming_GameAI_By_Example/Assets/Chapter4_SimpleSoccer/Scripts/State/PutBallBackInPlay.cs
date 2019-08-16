@@ -29,6 +29,14 @@ public class PutBallBackInPlay : State<GoalKeeper>
         PlayerBase receiver = keeper.Team().players[Random.Range(1,5)].GetComponent<PlayerBase>();
         Vector2 ballTarget = new Vector2(0f,0f);
 
+        if(!keeper.Team().AllPlayersAtHome() || !keeper.Team().opponentTeam.AllPlayersAtHome())
+        {
+            keeper.Team().opponentTeam.ReturnAllFieldPlayersToHome();
+            keeper.Team().ReturnAllFieldPlayersToHome();
+            return;
+        }
+
+
         if (keeper.Team().FindPass(keeper, receiver, ref ballTarget, Prm.instance.MaxPassingForce, Prm.instance.GoalKeeperMinPassDist))
         {
             if(keeper.Team().AllPlayersAtHome() && keeper.Team().opponentTeam.AllPlayersAtHome())

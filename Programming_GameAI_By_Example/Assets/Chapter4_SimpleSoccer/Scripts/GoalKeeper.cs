@@ -28,15 +28,12 @@ public class GoalKeeper : FieldPlayer
     {
         float x = Team().HomeGoal().Center().x;
         float y = 0f - 1 * .5f + (Ball().transform.position.y * 10f) / 20f;
-       // Debug.Log("Rear Interpose Taget : " + x + ", " + y);
         return new Vector2(x, y);
     }
 
     public new void SetTarget(Vector2 newPos)
     {
-        Debug.Log(" Steering으로 new POs로 가게끔 코딩 해줘야 함." + newPos);
         transform.position = newPos;
-
     }
 
     public new bool HandleMessage(Telegram_CH4 msg)

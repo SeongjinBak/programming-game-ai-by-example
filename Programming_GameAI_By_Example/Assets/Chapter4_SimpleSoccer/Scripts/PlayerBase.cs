@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBase : MovingEntity_CH4
 {
-    
+
     public float myMaxSpeed = 10f;
     public float myMaxTurnRate = 2f;
     public Vector2 myMaxForce = new Vector2(10f, 10f);
@@ -20,13 +20,13 @@ public class PlayerBase : MovingEntity_CH4
     // Start is called before the first frame update
     void Awake()
     {
-        if(transform.name == "1")
+        if (transform.name == "1")
         {
             playerRole = "GoalKeeper";
         }
         else
         {
-            if(transform.name == "4" || transform.name == "5")
+            if (transform.name == "4" || transform.name == "5")
             {
                 playerRole = "Attacker";
             }
@@ -36,7 +36,7 @@ public class PlayerBase : MovingEntity_CH4
         homeRegion = gameObject.transform.position;
         steering = GetComponent<Steering_CH4>();
 
-        
+
     }
 
     private void Start()
@@ -60,7 +60,7 @@ public class PlayerBase : MovingEntity_CH4
         myMaxSpeed = speed;
 
     }
-  
+
     public float DistToBall()
     {
         return distToBall;
@@ -93,21 +93,25 @@ public class PlayerBase : MovingEntity_CH4
     {
         return soccerBall;
     }
+
     public bool IsAheadOfAttacker()
     {
         return Mathf.Abs(transform.position.x - Team().opponentsGoal.Center().x) < Mathf.Abs(Team().ControllingPlayer().transform.position.x - Team().opponentsGoal.Center().x);
     }
+
     public bool IsControllingPlayer()
     {
         return Team().ControllingPlayer() == this.gameObject;
     }
+
     public bool InHomeRegion()
     {
         if (Team().teamColor == TeamColor.Red)
-            return ((int)transform.position.x == (int)Team().initialRegion[ID() - 1].x && (int)transform.position.y == (int)Team().initialRegion[ID() - 1].y);
+            return ((int)transform.position.x == (int)Team().initialRegion[Id() - 1].x && (int)transform.position.y == (int)Team().initialRegion[Id() - 1].y);
         else
-            return ((int)transform.position.x == (int)Team().initialRegion[ID() - 6].x && (int)transform.position.y == (int)Team().initialRegion[ID() - 6].y);
+            return ((int)transform.position.x == (int)Team().initialRegion[Id() - 6].x && (int)transform.position.y == (int)Team().initialRegion[Id() - 6].y);
     }
+
     public Vector2 HomeRegion()
     {
         return homeRegion;
@@ -116,27 +120,29 @@ public class PlayerBase : MovingEntity_CH4
     public void SetHomeRegion(Vector2 region)
     {
         homeRegion = region;
-        
+
     }
+
     public void SetVelocity(Vector2 v)
     {
         v_velocity = v;
     }
+
     public SoccerPitch Pitch()
     {
         return SoccerPitch.instance;
     }
+
     public void TrackBall()
     {
-       // Debug.Log("TrackBall y축 회전되어서 그냥 꺼뒀음");
-        //transform.LookAt(Ball().transform.position);
     }
+
     public string Role()
     {
         return playerRole;
     }
-    
-    public  bool InHotRegion() 
+
+    public bool InHotRegion()
     {
         return Mathf.Abs(transform.position.x - Team().opponentsGoal.Center().x) < Pitch().PlayingAreaLength() / 3;
     }
@@ -144,7 +150,7 @@ public class PlayerBase : MovingEntity_CH4
     public bool PositionInFrontOfPlayer(Vector2 pos)
     {
         Vector2 toSubject = pos - (Vector2)transform.position;
-        if(Vector2.Dot(toSubject, Heading()) > 0)
+        if (Vector2.Dot(toSubject, Heading()) > 0)
         {
             return true;
         }
@@ -171,27 +177,25 @@ public class PlayerBase : MovingEntity_CH4
 
     public void FindSupport()
     {
-        if(Team().SupportingPlayer() == null)
+        if (Team().SupportingPlayer() == null)
         {
             PlayerBase _bestSupportPlayer = Team().DetermineBestSupportingAttacker();
             Team().SetSuppprtingPlayer(_bestSupportPlayer.gameObject);
-            MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(), SoccerMessages.Msg_SupportAttacker, null);
+            MessageDispatcher_CH4.instance.DispatchMessage(0f, Id(), Team().SupportingPlayer().GetComponent<PlayerBase>().Id(), SoccerMessages.Msg_SupportAttacker, null);
 
         }
         PlayerBase bestSupportPlayer = Team().DetermineBestSupportingAttacker();
 
-        if(bestSupportPlayer && bestSupportPlayer != Team().SupportingPlayer())
+        if (bestSupportPlayer && bestSupportPlayer != Team().SupportingPlayer())
         {
             if (Team().SupportingPlayer())
             {
-                MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(),SoccerMessages.Msg_GoHome);
+                MessageDispatcher_CH4.instance.DispatchMessage(0f, Id(), Team().SupportingPlayer().GetComponent<PlayerBase>().Id(), SoccerMessages.Msg_GoHome);
             }
 
             Team().SetSuppprtingPlayer(bestSupportPlayer.gameObject);
 
-            MessageDispatcher_CH4.instance.DispatchMessage(0f, ID(), Team().SupportingPlayer().GetComponent<PlayerBase>().ID(), SoccerMessages.Msg_SupportAttacker);
-
-
+            MessageDispatcher_CH4.instance.DispatchMessage(0f, Id(), Team().SupportingPlayer().GetComponent<PlayerBase>().Id(), SoccerMessages.Msg_SupportAttacker);
         }
     }
 

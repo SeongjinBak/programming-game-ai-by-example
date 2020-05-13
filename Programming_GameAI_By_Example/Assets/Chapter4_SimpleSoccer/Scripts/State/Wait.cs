@@ -20,9 +20,9 @@ public class Wait : State<FieldPlayer>
         if (player.Pitch().GameOn())
         {
             if (player.Team().teamColor == TeamColor.Blue)
-                player.Steering().SetTarget((player.Team().initialRegion[player.ID() - 6]));
+                player.Steering().SetTarget((player.Team().initialRegion[player.Id() - 6]));
             else
-                player.Steering().SetTarget((player.Team().initialRegion[player.ID() - 1]));
+                player.Steering().SetTarget((player.Team().initialRegion[player.Id() - 1]));
         }
     }
 
@@ -59,7 +59,6 @@ public class Wait : State<FieldPlayer>
 
     public override void Exit(FieldPlayer player)
     {
-        player.Steering().SeekOff();
-        // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
+       // player.Steering().SeekOff();
     }
 }

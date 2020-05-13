@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * 플레이어가 메시지를 수신하였을 때의 상태를 정의
+ */ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +32,6 @@ public class GlobalPlayerState : State<FieldPlayer>
 
                     return true;
                 }
-                
             case SoccerMessages.Msg_SupportAttacker:
                 {
                     if (player.GetFSM().IsInstate(SupportAttacker.instance))
@@ -64,14 +66,12 @@ public class GlobalPlayerState : State<FieldPlayer>
                     player.Ball().SetOwner(receiver.gameObject);
 
                     player.Ball().Kick((receiver.transform.position - player.Ball().transform.position).normalized, Prm.instance.MaxPassingForce);
-                   // Debug.Log("p179 공 패스 및 메시지 전송 구현 했음. 특이사항 : extra info 로 receiver의 transform을 넘겼음. \n 패스성공");
-                    MessageDispatcher_CH4.instance.DispatchMessage(0f, player.ID(), receiver.ID(), SoccerMessages.Msg_ReceiveBall, receiver.transform);
+                    MessageDispatcher_CH4.instance.DispatchMessage(0f, player.Id(), receiver.Id(), SoccerMessages.Msg_ReceiveBall, receiver.transform);
 
                     player.GetFSM().ChangeState(Wait.instance);
 
                     player.FindSupport();
                     return true;
-
                 }
         }
 

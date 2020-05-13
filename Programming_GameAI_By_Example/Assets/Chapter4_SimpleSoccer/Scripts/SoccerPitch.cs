@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * 게임 매니저의 역할을 하는 경기장
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

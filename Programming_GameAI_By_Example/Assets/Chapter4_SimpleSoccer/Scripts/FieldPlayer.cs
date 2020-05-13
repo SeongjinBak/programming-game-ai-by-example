@@ -28,9 +28,7 @@ public class FieldPlayer : PlayerBase
 
     public void SetTarget(Vector2 newPos)
     {
-        Debug.Log(" Steering으로 new POs로 가게끔 코딩 해줘야 함." + newPos);
         transform.position = newPos;
-
     }
 
     public new bool HandleMessage(Telegram_CH4 msg)
@@ -81,7 +79,7 @@ public class FieldPlayer : PlayerBase
     {
         while (true)
         {
-            // mass를 15함.
+            // mass를 15로 지정함.
             Vector2 desiredVelocity = Steering().Calculate() / 70f;
             transform.position = (Vector2)transform.position + desiredVelocity;
             yield return new WaitForSeconds(0.05f);

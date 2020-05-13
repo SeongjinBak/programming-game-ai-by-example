@@ -17,8 +17,8 @@ public class Prm : MonoBehaviour
     }
 
     [Header("MaxPower")]
-    public float MaxPassingForce = .7f;
-    public float MaxShootingForce = 1.1f;
+    public float MaxPassingForce = .4f;
+    public float MaxShootingForce = 0.9f;
     public float PlayerMaxSpeedWithBall = 2f;
     public float PlayerMaxSpeedWithoutBall = 2.8f;
     public float PlayerInTargetRange = 3f;
@@ -32,7 +32,7 @@ public class Prm : MonoBehaviour
     public float Spot_DistFromControllingPlayerStrength = 2f; 
 
     [Header("Misc")]
-    public int NumAttemptsToFindValidStrike = 3;
+    public int NumAttemptsToFindValidStrike = 4;
     public int PlayerKickFrequency = 3;
     public float ChanceOfUsingArriveTypeReceiveBehavior = 0.5f;
     public float ChancePlayerAttemptsPotShot = 0.02f;
@@ -43,6 +43,6 @@ public class Prm : MonoBehaviour
     [Header("KEEPER")]
     public float KeeperInBallRange = .5f;
     public float GoalKeeperInterceptRange = 2f;
-    public float GoalKeeperMinPassDist = 8f;
+    public float GoalKeeperMinPassDist = 5f;
 
 }

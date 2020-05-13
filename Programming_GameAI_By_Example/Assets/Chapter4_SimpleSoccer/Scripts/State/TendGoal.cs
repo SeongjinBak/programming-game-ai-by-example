@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * 골키퍼로 하여금 골을 막도록 한다.
+ */ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

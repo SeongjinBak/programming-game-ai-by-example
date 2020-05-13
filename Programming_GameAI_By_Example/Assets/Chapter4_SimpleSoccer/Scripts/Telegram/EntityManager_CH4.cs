@@ -30,8 +30,8 @@ public class EntityManager_CH4 : MonoBehaviour
 
     public void RegisterEntity(PlayerBase newEntity)
     {
-        m_EntityMap.Add((newEntity as BaseGameEntity_CH3).ID(), newEntity);
-        Debug.Log("\nEntity Register done with succeed ID : " +(newEntity as BaseGameEntity_CH3).ID());
+        m_EntityMap.Add((newEntity as BaseGameEntity_CH3).Id(), newEntity);
+        Debug.Log("\nEntity Register done with succeed ID : " +(newEntity as BaseGameEntity_CH3).Id());
 
     }
 
@@ -42,7 +42,7 @@ public class EntityManager_CH4 : MonoBehaviour
 
     public void RemoveEntity(FieldPlayer pEntity)
     {
-        m_EntityMap.Remove(pEntity.ID());
+        m_EntityMap.Remove(pEntity.Id());
     }
 
 }

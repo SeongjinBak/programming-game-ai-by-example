@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * Attacking State.
+ */ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,10 +45,10 @@ public class Attacking : State<SoccerTeam>
             redRegions[2] = blueRegions[4];
             redRegions[3] = blueRegions[1];
             redRegions[4] = blueRegions[2];
-
             Defending.instance.ChangePlayerHomeRegion(team, redRegions);
         }
-
+        
+        // 현재 맡은 상태가 없는 플레이어는, 지정된 전술 위치로 이동시킨다.
         team.UpdateTargetsOfWaitingPlayers();
     }
 
@@ -55,7 +58,7 @@ public class Attacking : State<SoccerTeam>
         {     
             team.GetFSM().ChangeState(Defending.instance);
         }
-        //Debug.Log("여기서, BSS 계산했는데 어디다가반환을 안한다.");
+
         SupportSpotCalculator.instance.DetermineBestSupportingPosition(team.teamColor);
     }
 

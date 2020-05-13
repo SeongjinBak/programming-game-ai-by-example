@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * 경기에서, 골키퍼가 공으로 멀리 롱패스하는 상태
+ */ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,13 +48,12 @@ public class PutBallBackInPlay : State<GoalKeeper>
                 SoccerPitch.instance.SetGoalKeeperHasBall(false);
                 GameObject ballTargetTr = new GameObject();
                 ballTargetTr.transform.position = ballTarget;
-                MessageDispatcher_CH4.instance.DispatchMessage(0f, keeper.ID(), receiver.ID(), SoccerMessages.Msg_ReceiveBall, ballTargetTr.transform);
+                MessageDispatcher_CH4.instance.DispatchMessage(0f, keeper.Id(), receiver.Id(), SoccerMessages.Msg_ReceiveBall, ballTargetTr.transform);
                 keeper.GetFSM().ChangeState(TendGoal.instance);
                 return;
             }
         }
         keeper.SetVelocity(new Vector2(0, 0));
-        //keeper.Ball().transform.position = new Vector2(0, 0);
     }
 
     public override void Exit(GoalKeeper keeper)

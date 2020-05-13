@@ -19,27 +19,34 @@ public class SoccerBall : MovingEntity_CH4
         oldPos = transform.position;
         StartCoroutine(Updating());
     }
-    public void TestCollisionWithWalls()
+
+    public void ResetBallState()
     {
-        
+        oldPos = Vector2.zero;
+        velocity = Vector2.zero;
+        owner = null;
+        transform.position = Vector2.zero;
     }
 
+    // 공의 속력
     public float Speed()
     {
         return velocity.magnitude;
     }
 
+    // 공의 속도
     public new Vector2 Velocity()
     {
         return velocity;
     }
+
     private void Awake()
     {
         ballRb = GetComponent<Rigidbody2D>();
         transform.position = new Vector2(0, 0);
-
     }
     
+    // 공의 이동
     public IEnumerator Updating()
     {
         while (true)
@@ -52,7 +59,7 @@ public class SoccerBall : MovingEntity_CH4
 
             v_heading = velocity.normalized;
 
-
+            // 경기장 밖으로 나간경우 속도 0으로 지정
             if(transform.position.x < -24 || transform.position.x > 24 || transform.position.y > 10 || transform.position.y < -10)
             {
                 velocity = new Vector2(0, 0);
@@ -67,6 +74,7 @@ public class SoccerBall : MovingEntity_CH4
         return false;
     }
 
+    // 공을 찬 경우, 공에 힘을 가함
     public void Kick(Vector2 direction, float force)
     {
         velocity = new Vector2(0, 0);
@@ -75,15 +83,12 @@ public class SoccerBall : MovingEntity_CH4
         Vector2 acc = (direction * force) / ballRb.mass;
 
         velocity = acc;
-
-
     }
 
+    // 공의 이동 예측 시간
     public float TimeToCoverDistance(Vector2 from, Vector2 to, float force)
     {
         float speed = force / ballRb.mass;
-
-        // Use Expression : v^2 = u^2 + ax;
 
         float distanceToCover = Vector2.Distance(from, to);
 
@@ -96,18 +101,18 @@ public class SoccerBall : MovingEntity_CH4
         return (v - speed) / ballRb.drag;
     }
 
+    // 공의 위치 예측
     public Vector2 FuturePosition(float time)
     {
         // Use Expression : x = ut  + 1/2at^2;
 
         Vector2 ut = v_velocity * time;
-        // I use rigidbody.drag instead of Prm.Friction.
+
         float half_a_t_squared = 0.5f * ballRb.drag * time * time;
 
         Vector2 scalarToVector = half_a_t_squared * v_velocity.normalized;
 
         return (Vector2)transform.position + ut + scalarToVector;
-
     }
 
     // This method is used when keeper and player who trapping the ball trap(to stop the ball).
@@ -116,14 +121,17 @@ public class SoccerBall : MovingEntity_CH4
         v_velocity = new Vector2(0,0);
         this.owner = owner;
     }
+
     public void SetOwner(GameObject ow)
     {
         owner = ow;
     }
+
     public GameObject GetOwner()
     {
         return owner;
     }
+
     public Vector2 OldPos()
     {
         return oldPos;

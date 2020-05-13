@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * 골키퍼의 골대 본래 위치로 가는 상태
+ */ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +22,6 @@ public class ReturnHome : State<GoalKeeper>
     public override void Enter(GoalKeeper keeper)
     {
         keeper.Steering().ArriveOn();
-       // keeper.Steering().SetTarget(keeper.Team().initialRegion[0]);
     }
 
     public override void Execute(GoalKeeper keeper)

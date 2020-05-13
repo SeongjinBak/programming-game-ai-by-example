@@ -26,7 +26,6 @@ public class Goal : MonoBehaviour
         rightPost = new Vector2(transform.position.x, transform.position.y - 5f);
         center = (leftPost + rightPost) / 2;
         numGoalsScored = 0;
-        //facing = Vector2.Perpendicular((rightPost - leftPost).normalized);
     }
 
     public Vector2 Center()

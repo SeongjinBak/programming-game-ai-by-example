@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * Dribble State.
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +18,8 @@ public class Dribble : State<FieldPlayer>
         }
         DontDestroyOnLoad(this.gameObject);
     }
+
+    // 컨트롤 할 플레이어 변경
     public override void Enter(FieldPlayer player)
     {
         player.Team().SetControllingPlayer(player.gameObject);
@@ -22,9 +27,10 @@ public class Dribble : State<FieldPlayer>
 
     public override void Execute(FieldPlayer player)
     {
+        // 본인팀의 골대와 플레이어의 방향 벡터 내적하여 각도 판별
         float _dot = Vector2.Dot(player.Team().HomeGoal().Facing(), player.Heading());
         
-        // If Ball is located in side of Home goal position, and player heading at home goal.
+        // 플레이어가 본인 골대를 향해있다면, 상대편 골대 쪽으로 방향을 튼다.
         if (_dot < 0)
         {
             Vector2 direction = -player.Heading();
@@ -34,27 +40,24 @@ public class Dribble : State<FieldPlayer>
 
             player.transform.Rotate(direction, angle);
 
+            // 드리블 속도
             const float kickingForce = .2f;
-            print("Drilble1 1 " + kickingForce);
+
             player.Ball().SetOwner(player.gameObject);
             player.Ball().Kick(direction, kickingForce);
-
         }
-        // Kick the ball to home goal area.
         else
         {
-            print("Drilble2  " + Prm.instance.MaxDribbleForce);
             player.Ball().SetOwner(player.gameObject);
             player.Ball().Kick(player.Team().HomeGoal().Facing(), .5f);
         }
+
         //Player has to chase the ball after short term kicking.
         player.GetFSM().ChangeState(ChaseBall.instance);
         return;
-
     }
 
     public override void Exit(FieldPlayer player)
     {
-     
     }
 }

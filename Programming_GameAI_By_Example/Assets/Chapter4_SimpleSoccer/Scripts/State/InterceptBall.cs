@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * Intercept ball state
+ */ 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +19,7 @@ public class InterceptBall : State<GoalKeeper>
         }
         DontDestroyOnLoad(this.gameObject);
     }
+
     public override void Enter(GoalKeeper keeper)
     {
         keeper.Steering().PursuitOn();
@@ -22,12 +27,14 @@ public class InterceptBall : State<GoalKeeper>
 
     public override void Execute(GoalKeeper keeper)
     {
+        // 골대에서 너무 멀리 나온경우
         if(keeper.TooFarFromGoalMouth() && !keeper.IsClosestPlayerOnPitchToBall())
         {
             keeper.GetFSM().ChangeState(ReturnHome.instance);
             return;
         }
 
+        // 골키퍼가 공을 막은 경우
         if (keeper.BallWithinKeeperRange())
         {
             keeper.Ball().Trap(gameObject);

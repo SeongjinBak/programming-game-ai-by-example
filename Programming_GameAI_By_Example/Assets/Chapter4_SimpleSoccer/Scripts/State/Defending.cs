@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ * Defending State.
+ */ 
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,10 +21,9 @@ public class Defending : State<SoccerTeam>
 
     public override void Enter(SoccerTeam team)
     {
-
-       
          Vector2[] blueRegions = GameObject.Find("BlueTeam").GetComponent<SoccerTeam>().initialRegion;
          Vector2[] redRegions = GameObject.Find("RedTeam").GetComponent<SoccerTeam>().initialRegion;
+
         if(team.teamColor == TeamColor.Blue)
         {
             ChangePlayerHomeRegion(team, blueRegions);
@@ -33,25 +35,22 @@ public class Defending : State<SoccerTeam>
         }
         
         team.UpdateTargetsOfWaitingPlayers();
-        Debug.Log("\n[Team " + team.teamColor + "] has Entered Defending State!");
     }
 
     public override void Execute(SoccerTeam team)
     {
         if (team.InControl())
         {
-
             team.GetFSM().ChangeState(Attacking.instance);
             return;
         }
     }
 
     public override void Exit(SoccerTeam team)
-    {
-        // Debug.Log("\n" + miner.GetNameOfEntity() + ": " + "I am leaving the gold mine with my pockets full, oh sweet gold");
-    }
+    {}
 
 
+    // 플레이어의 복귀 지점 변경
     public void ChangePlayerHomeRegion(SoccerTeam team, Vector2 [] region)
     {
         for(int p = 0 ; p < 5; p++)

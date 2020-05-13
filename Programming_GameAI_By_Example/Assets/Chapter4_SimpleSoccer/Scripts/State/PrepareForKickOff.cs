@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * 경기 시작 준비 상태(득점 or 골키핑)
+ */
+ 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,9 +34,7 @@ public class PrepareForKickOff : State<SoccerTeam>
     {
         if (team.AllPlayersAtHome() && team.opponentTeam.AllPlayersAtHome())
         {
-
             team.GetFSM().ChangeState(Defending.instance);
-
         }
     }
 

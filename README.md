@@ -15,6 +15,7 @@ Programming Game AI by Example - C# & Unity Engine(2018.3.0.f2)
 # 4. Simple Soccer.
 * The Simple Soccer project covers Steering and FSM systems.
 * This project reveals that how we can calculate a 'Best Supporting Spot', 'Pass or Shoot mechanism' and following 'State' what Player should have. 
+* The Youtube video link of this chapter is: https://www.youtube.com/watch?v=NkzPBJMhQC8&t
 # 5. Secret of graph.
 * This chapter describes that calculating Shortest path methods by using DSF, BSF, Dijkstra and A* algorithms.
 * I didn't post any of the context in this chapter because those algorithms are very famous, and also It is too much for me to describe all of those algorithm mechanism.

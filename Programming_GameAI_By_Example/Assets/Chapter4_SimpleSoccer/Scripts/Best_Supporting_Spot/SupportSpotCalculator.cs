@@ -88,7 +88,7 @@ public class SupportSpotCalculator : MonoBehaviour
 
                 if (teamName.GetComponent<SoccerTeam>().SupportingPlayer())
                 {
-                    // 3. 지원하는 선수와의 최적 거리 계산
+                    // 3. 지원하는 선수와의 최적 거리 계산한다.
                     const float optimalDistance = 5f;
                     float dist = Vector2.Distance(teamName.GetComponent<SoccerTeam>().ControllingPlayer().transform.position, item.transform.position);
                     float temp = Mathf.Abs(optimalDistance - dist);

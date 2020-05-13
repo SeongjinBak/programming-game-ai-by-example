@@ -17,13 +17,13 @@ public class SupportSpot : MonoBehaviour
         score = 0f;
     }
 
-    // 점수 반환
+    // 점수 반환.
     public float GetScore()
     {
         return score;
     }
 
-    // 점수 지정
+    // 점수 지정.
     public void SetScore(float value)
     {
         score = value;
